@@ -36,9 +36,17 @@ public class Vuelo extends EntityCore implements Serializable {
 
 	@Column(name="T_DESTINO")
 	private String tDestino;
-
+	
 	@Column(name="T_ORIGEN")
 	private String tOrigen;
+	
+	@PrimaryKeyJoinColumn(name = "T_ORIGEN", referencedColumnName = "T_CODIGO")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Aeropuerto origen;
+	
+	@PrimaryKeyJoinColumn(name = "T_DESTINO", referencedColumnName = "T_CODIGO")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Aeropuerto destino;
 
 	public Vuelo() {
 	}
@@ -89,6 +97,22 @@ public class Vuelo extends EntityCore implements Serializable {
 
 	public void setTOrigen(String tOrigen) {
 		this.tOrigen = tOrigen;
+	}
+
+	public Aeropuerto getOrigen() {
+		return origen;
+	}
+
+	public void setOrigen(Aeropuerto origen) {
+		this.origen = origen;
+	}
+
+	public Aeropuerto getDestino() {
+		return destino;
+	}
+
+	public void setDestino(Aeropuerto destino) {
+		this.destino = destino;
 	}
 
 }

@@ -8,12 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsf">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-			<attribute name="owner.project.facets" value="jst.jsf"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/primefaces">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
@@ -31,5 +25,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ejb"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/GansoSonicoJPA"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jpa"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsf"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

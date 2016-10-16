@@ -1,0 +1,53 @@
+<ui:composition template="/template/template.xhtml" 
+				xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<div class="row">
+			<h1>Vuelos</h1>
+			<h3>Nuestros vuelos por aeropuerto y ciudad</h3>
+			<br/>
+			<br/>
+			<div class="row">
+				<h:form id="form_vuelos">
+					<p:dataTable var="vuelo" value="#{vuelosBean.listadoVuelos}" emptyMessage="No se encontraron registros." rows="50" paginator="true" paginatorPosition="bottom">
+						<p:column headerText="Origen:" filterBy="#{vuelo.origen.TNombre}" filterMatchMode="contains">
+							<h:panelGrid columns="1" styleClass="tabla-no-borde">
+								<h:outputText value="#{vuelo.origen.TNombre}" />
+								<h:outputText value="(#{vuelo.origen.TCiudad})" styleClass="negrilla" />
+							</h:panelGrid>
+						</p:column>
+
+						<p:column headerText="Destino:" filterBy="#{vuelo.destino.TNombre}" filterMatchMode="contains" style="width:250px;">
+							<h:panelGrid columns="1" styleClass="tabla-no-borde">
+								<h:outputText value="#{vuelo.destino.TNombre}" />
+								<h:outputText value="(#{vuelo.destino.TCiudad})" styleClass="negrilla" />
+							</h:panelGrid>
+						</p:column>
+
+						<p:column headerText="Salida:" filterBy="#{vuelo.dFechahorasalida}" filterMatchMode="contains" style="width:250px;">
+							<h:outputText value="#{vuelo.DFechahorasalida}">
+								<f:convertDateTime dateStyle="full" timeZone="EST" type="date" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Capacidad:" filterBy="#{vuelo.nCapacidad}" filterMatchMode="contains" style="width:250px;">
+							<h:outputText value="#{vuelo.NCapacidad}" />
+						</p:column>
+
+						<p:column headerText="Valor Base:" filterBy="#{vuelo.nValorbase}" filterMatchMode="contains" style="width:250px;">
+							<h:outputText value="#{vuelo.NValorbase}">
+								<f:convertNumber pattern="$###,###" currencySymbol="$" type="currency" />
+							</h:outputText>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>

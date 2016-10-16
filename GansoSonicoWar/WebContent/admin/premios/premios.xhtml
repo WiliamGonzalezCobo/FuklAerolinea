@@ -1,0 +1,41 @@
+<ui:composition template="/template/template.xhtml" 
+				xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<div class="row">
+			<h1>Premios</h1>
+			<h3>Premios que puedes redimir con nuestro plan de millas</h3>
+			<br/>
+			<br/>
+			<div class="row">
+				<h:form id="form_premios">
+					<p:dataTable var="premio" value="#{premiosBean.listadoPremios}" emptyMessage="No se encontraron registros." rows="50" paginator="true" paginatorPosition="bottom">
+						<p:column headerText="Premio:" filterBy="#{premio.TNombrepremio}" filterMatchMode="contains">
+							<h:panelGrid columns="1" styleClass="tabla-no-borde">
+								<h:outputText value="#{premio.TNombrepremio}" />
+							</h:panelGrid>
+						</p:column>
+
+						<p:column headerText="Descripcion:" filterBy="#{premio.TDescripcion}" filterMatchMode="contains" style="width:250px;">
+							<h:panelGrid columns="1" styleClass="tabla-no-borde">
+								<h:outputText value="#{premio.TDescripcion}" />
+							</h:panelGrid>
+						</p:column>
+
+						<p:column headerText="Valor En Millas:" filterBy="#{premio.dFechahorasalida}" filterMatchMode="contains" style="width:250px;">
+							<h:outputText value="#{premio.NValormillas}">
+								<f:convertNumber pattern="###,###" currencySymbol="$" type="currency" />
+							</h:outputText>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>

@@ -13,3 +13,16 @@
 .zona-carga .ui-fileupload-content {
 	height: 80px;
 }
+
+.ui-datatable table{
+	text-align: center;
+}
+
+.tabla-no-borde tbody tr td{
+	border: none;
+	line-height: 2px;
+}
+
+.negrilla{
+	font-weight: bold;
+}

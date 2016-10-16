@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -17,11 +19,11 @@ import co.com.ganso.services.bussinesslogic.exceptions.NonexistentEntityExceptio
 import co.com.ganso.services.bussinesslogic.exceptions.PreexistingEntityException;
 
 @Stateless
-public class ManagerSvc implements IManagerSvc{
-	
-	@PersistenceContext(unitName=JPACons.PersistenceUnit)
-    private EntityManager em;
-	
+public class ManagerSvc implements IManagerSvc {
+
+	@PersistenceContext(unitName = JPACons.PersistenceUnit)
+	private EntityManager em;
+
 	@Override
 	public void create(EntityCore entityCore) throws PreexistingEntityException, Exception {
 		em.persist(entityCore);
@@ -34,55 +36,48 @@ public class ManagerSvc implements IManagerSvc{
 
 	@Override
 	public void destroy(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException {
-        EntityCore entityCore =  em.getReference(EntityCore.class, id);;
-        em.remove(entityCore);
+		EntityCore entityCore = em.getReference(EntityCore.class, id);
 	}
 
 	@Override
-	public List<EntityCore> findEntityCoreEntities() {
-		return findEntityCoreEntities(true, -1, -1);
+	public <T> List<T> findAll(Class<T> clase) {
+		return findRegister(true, -1, -1, clase);
 	}
 
 	@Override
-	public List<EntityCore> findEntityCoreEntities(int maxResults, int firstResult) {
-		return findEntityCoreEntities(false, maxResults, firstResult);
+	public <T> List<T> findLimit(int maxResults, int firstResult, Class<T> clase) {
+		return findRegister(false, maxResults, firstResult, clase);
 	}
 
-	 private List<EntityCore> findEntityCoreEntities(boolean all, int maxResults, int firstResult) {
-	        try {
-	            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-	            cq.select(cq.from(EntityCore.class));
-	            Query q = em.createQuery(cq);
-	            if (!all) {
-	                q.setMaxResults(maxResults);
-	                q.setFirstResult(firstResult);
-	            }
-	            return q.getResultList();
-	        } finally {
-	            em.close();
-	        }
-	    }
+	private <T> List<T> findRegister(boolean all, int maxResults, int firstResult, Class<T> clase) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<T> cq = cb.createQuery(clase);
+		Root<T> rootEntry = cq.from(clase);
+		CriteriaQuery<T> todos = cq.select(rootEntry);
+		TypedQuery<T> allQuery = em.createQuery(todos);
+		return allQuery.getResultList();
+	}
 
-	    @Override
-	    public EntityCore findEntityCore(BigDecimal id) {
-	        try {
-	            return em.find(EntityCore.class, id);
-	        } finally {
-	            em.close();
-	        }
-	    }
+	@Override
+	public EntityCore findEntityCore(BigDecimal id) {
+		try {
+			return em.find(EntityCore.class, id);
+		} finally {
+			em.close();
+		}
+	}
 
-	    @Override
-	    public int getEntityCoreCount() {
-	        try {
-	            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-	            Root<EntityCore> rt = cq.from(EntityCore.class);
-	            cq.select(em.getCriteriaBuilder().count(rt));
-	            Query q = em.createQuery(cq);
-	            return ((Long) q.getSingleResult()).intValue();
-	        } finally {
-	            em.close();
-	        }
-	    }	
-	
+	@Override
+	public int getEntityCoreCount() {
+		try {
+			CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+			Root<EntityCore> rt = cq.from(EntityCore.class);
+			cq.select(em.getCriteriaBuilder().count(rt));
+			Query q = em.createQuery(cq);
+			return ((Long) q.getSingleResult()).intValue();
+		} finally {
+			em.close();
+		}
+	}
+
 }

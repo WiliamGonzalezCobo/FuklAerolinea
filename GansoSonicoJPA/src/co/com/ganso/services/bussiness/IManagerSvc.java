@@ -12,18 +12,18 @@ import co.com.ganso.services.bussinesslogic.exceptions.PreexistingEntityExceptio
 
 @Local
 public interface IManagerSvc {
-	
+
 	public void create(EntityCore entityCore) throws PreexistingEntityException, Exception;
 
 	public void edit(EntityCore entityCore) throws IllegalOrphanException, NonexistentEntityException, Exception;
 
 	public void destroy(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException;
 
-	public List<EntityCore> findEntityCoreEntities();
+	public <T> List<T> findAll(Class<T> clase);
 
-	public List<EntityCore> findEntityCoreEntities(int maxResults, int firstResult);
+	public <T> List<T> findLimit(int maxResults, int firstResult, Class<T> clase);
 
-	public EntityCore findEntityCore(BigDecimal id);
+	public <T> T findEntityCore(BigDecimal id);
 
 	public int getEntityCoreCount();
 }
