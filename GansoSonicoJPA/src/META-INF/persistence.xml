@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="GansoSonico">
+	<persistence-unit name="GansoSonico" transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>java:/ganso</jta-data-source>
-		 <class>co.com.ganso.entities.FactorPrecio</class>
-	     <class>co.com.ganso.entities.Vuelo</class>
-	     <class>co.com.ganso.entities.Pais</class>
-	     <class>co.com.ganso.entities.Aeropuerto</class>
-	     <class>co.com.ganso.entities.PlanMillas</class>
-	     <class>co.com.ganso.entities.Premio</class>
-	     <class>co.com.ganso.entities.Categoria</class>
-	     <class>co.com.ganso.entities.PersonaPremio</class>
-	     <class>co.com.ganso.entities.Usuario</class>
-	     <class>co.com.ganso.entities.Operacion</class>
-	     <class>co.com.ganso.entities.ClaseVuelo</class>
-	     <class>co.com.ganso.entities.Persona</class>
-	     <class>co.com.ganso.entities.Estado</class>
+    	<jta-data-source>java:/ganso</jta-data-source>
+		<class>co.com.ganso.entities.Aeropuerto</class>
+		<class>co.com.ganso.entities.Categoria</class>
+		<class>co.com.ganso.entities.ClaseVuelo</class>
+		<class>co.com.ganso.entities.Estado</class>
+		<class>co.com.ganso.entities.FactorPrecio</class>
+		<class>co.com.ganso.entities.Operacion</class>
+		<class>co.com.ganso.entities.Pais</class>
+		<class>co.com.ganso.entities.Persona</class>
+		<class>co.com.ganso.entities.PersonaPremio</class>
+		<class>co.com.ganso.entities.PlanMilla</class>
+		<class>co.com.ganso.entities.Premio</class>
+		<class>co.com.ganso.entities.Usuario</class>
+		<class>co.com.ganso.entities.Vuelo</class>
+		<properties>
+			<property name="eclipselink.target-database" value="HSQL" />
+			<property name="eclipselink.ddl-generation.output-mode" value="database" />
+			<property name="eclipselink.target-server" value="JBoss" />
+			<property name="eclipselink.weaving" value="false" />
+			<property name="eclipselink.logging.level" value="FINEST" />
+		</properties>
 	</persistence-unit>
 </persistence>

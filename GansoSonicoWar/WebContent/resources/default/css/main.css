@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+*{
+	font-size: 10px;
+	font-family: 	
+}
+
+.cargar-archivo{
+	height: 150px;
+	background: #ccc;
+}
+
+.zona-carga .ui-fileupload-content {
+	height: 80px;
+}

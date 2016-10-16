@@ -1,130 +1,79 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.com.ganso.entities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
- *
- * @author juanc
+ * The persistent class for the TB_PERSONAPREMIO database table.
+ * 
  */
 @Entity
-@Table(name = "TB_PERSONAPREMIO")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "PersonaPremio.findAll", query = "SELECT t FROM PersonaPremio t"),
-    @NamedQuery(name = "PersonaPremio.findByNIdpersonapremio", query = "SELECT t FROM PersonaPremio t WHERE t.nIdpersonapremio = :nIdpersonapremio"),
-    @NamedQuery(name = "PersonaPremio.findByDFechacompra", query = "SELECT t FROM PersonaPremio t WHERE t.dFechacompra = :dFechacompra"),
-    @NamedQuery(name = "PersonaPremio.findByNValormillas", query = "SELECT t FROM PersonaPremio t WHERE t.nValormillas = :nValormillas")})
+@Table(name="TB_PERSONAPREMIO")
+@NamedQuery(name="PersonaPremio.findAll", query="SELECT p FROM PersonaPremio p")
 public class PersonaPremio implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @Column(name = "N_IDPERSONAPREMIO")
-    private BigDecimal nIdpersonapremio;
-    @Column(name = "D_FECHACOMPRA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dFechacompra;
-    @Column(name = "N_VALORMILLAS")
-    private BigInteger nValormillas;
-    @JoinColumn(name = "N_PERSONA", referencedColumnName = "N_IDPERSONA")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Persona nPersona;
-    @JoinColumn(name = "N_PREMIO", referencedColumnName = "N_IDPREMIO")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Premio nPremio;
+	@Id
+	@Column(name="N_IDPERSONAPREMIO")
+	private long nIdpersonapremio;
 
-    public PersonaPremio() {
-    }
+	@Temporal(TemporalType.DATE)
+	@Column(name="D_FECHACOMPRA")
+	private Date dFechacompra;
 
-    public PersonaPremio(BigDecimal nIdpersonapremio) {
-        this.nIdpersonapremio = nIdpersonapremio;
-    }
+	@Column(name="N_PERSONA")
+	private BigDecimal nPersona;
 
-    public BigDecimal getNIdpersonapremio() {
-        return nIdpersonapremio;
-    }
+	@Column(name="N_PREMIO")
+	private BigDecimal nPremio;
 
-    public void setNIdpersonapremio(BigDecimal nIdpersonapremio) {
-        this.nIdpersonapremio = nIdpersonapremio;
-    }
+	@Column(name="N_VALORMILLAS")
+	private BigDecimal nValormillas;
 
-    public Date getDFechacompra() {
-        return dFechacompra;
-    }
+	public PersonaPremio() {
+	}
 
-    public void setDFechacompra(Date dFechacompra) {
-        this.dFechacompra = dFechacompra;
-    }
+	public long getNIdpersonapremio() {
+		return this.nIdpersonapremio;
+	}
 
-    public BigInteger getNValormillas() {
-        return nValormillas;
-    }
+	public void setNIdpersonapremio(long nIdpersonapremio) {
+		this.nIdpersonapremio = nIdpersonapremio;
+	}
 
-    public void setNValormillas(BigInteger nValormillas) {
-        this.nValormillas = nValormillas;
-    }
+	public Date getDFechacompra() {
+		return this.dFechacompra;
+	}
 
-    public Persona getNPersona() {
-        return nPersona;
-    }
+	public void setDFechacompra(Date dFechacompra) {
+		this.dFechacompra = dFechacompra;
+	}
 
-    public void setNPersona(Persona nPersona) {
-        this.nPersona = nPersona;
-    }
+	public BigDecimal getNPersona() {
+		return this.nPersona;
+	}
 
-    public Premio getNPremio() {
-        return nPremio;
-    }
+	public void setNPersona(BigDecimal nPersona) {
+		this.nPersona = nPersona;
+	}
 
-    public void setNPremio(Premio nPremio) {
-        this.nPremio = nPremio;
-    }
+	public BigDecimal getNPremio() {
+		return this.nPremio;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (nIdpersonapremio != null ? nIdpersonapremio.hashCode() : 0);
-        return hash;
-    }
+	public void setNPremio(BigDecimal nPremio) {
+		this.nPremio = nPremio;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PersonaPremio)) {
-            return false;
-        }
-        PersonaPremio other = (PersonaPremio) object;
-        if ((this.nIdpersonapremio == null && other.nIdpersonapremio != null) || (this.nIdpersonapremio != null && !this.nIdpersonapremio.equals(other.nIdpersonapremio))) {
-            return false;
-        }
-        return true;
-    }
+	public BigDecimal getNValormillas() {
+		return this.nValormillas;
+	}
 
-    @Override
-    public String toString() {
-        return "co.com.ganso.entities.PersonaPremio[ nIdpersonapremio=" + nIdpersonapremio + " ]";
-    }
-    
+	public void setNValormillas(BigDecimal nValormillas) {
+		this.nValormillas = nValormillas;
+	}
+
 }

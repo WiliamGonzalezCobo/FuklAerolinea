@@ -4,32 +4,46 @@
 				xmlns:f="http://java.sun.com/jsf/core"
 				xmlns:h="http://java.sun.com/jsf/html"
 				xmlns:p="http://primefaces.org/ui">
-	
+
 	<ui:define name="content">
-		<div class="container">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="../index.html">
-                        	<h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" />
-                        </a>
-                    </div>
-                    <h2 class="navbar-text">Aerolinea el ganso sónico (Administrador)</h2>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido Administrador <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="upload.html">Subir Datos</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="reports.html">Reportes</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="index.html">Salir</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+		<div class="row">
+			<h1>Cargar datos de vuelo y premios</h1>
+			<h3>Sube los archivos de vuelo y de premios a redimir para el usuario.</h3>
+			<br/>
+			<br/>
+			<h4>Subir archivos de vuelos</h4>
+			<div class="row">
+				<h:form id="form_cargarArchivoVuelo">
+					<p:fileUpload value="#{cargarArchivoBean.archivoVuelo}" label="Seleccionar"
+						uploadLabel="Subir" cancelLabel="cancelar"
+						fileUploadListener="#{cargarArchivoBean.cargarArchivoVuelo}"
+						mode="advanced" dragDropSupport="true" update="messagesVuelo"
+						sizeLimit="1000000" allowTypes="/(\.|\/)(json)$/"
+						fileLimit="1"
+						fileLimitMessage="Solo se permite un archivo a la vez"
+						styleClass="zona-carga" 
+						invalidFileMessage="Archivo invalido"
+						invalidSizeMessage="El archivo excede el limite de carga"/>
+					<p:growl id="messagesVuelo" showDetail="true" />
+				</h:form>
+				<br/>
+				<br/>
+				<h4>Subir archivos de Premios</h4>
+				<h:form id="form_cargarArchivoPremios">
+					<p:fileUpload value="#{cargarArchivoBean.archivoPremio}" label="Seleccionar"
+						uploadLabel="Subir" cancelLabel="cancelar"
+						fileUploadListener="#{cargarArchivoBean.cargarArchivoPremio}"
+						mode="advanced" dragDropSupport="true" update="messagesPremio"
+						sizeLimit="1000000" allowTypes="/(\.|\/)(json)$/"
+						fileLimit="1"
+						fileLimitMessage="Solo se permite un archivo a la vez"
+						styleClass="zona-carga" 
+						invalidFileMessage="Archivo invalido"
+						invalidSizeMessage="El archivo excede el limite de carga"/>
+					<p:growl id="messagesPremio" showDetail="true" />
+				</h:form>
+			</div>
+		</div>
 	</ui:define>
-	
+
 </ui:composition>

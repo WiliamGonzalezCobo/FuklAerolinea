@@ -10,13 +10,45 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<h:outputStylesheet library="default" name="css/bootstrap.css" />
 	<h:outputStylesheet library="default" name="css/bootstrap-theme.css" />
-	<h:outputScript library="default" name="js/jquery-2.0.0.js" />
+	<h:outputStylesheet library="default" name="css/main.css" />
+<!-- 	<h:outputScript library="default" name="js/jquery-2.0.0.js" /> -->
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
 	<h:outputScript library="default" name="js/bootstrap.js" />
 
 </h:head>
 <h:body>
-	<ui:insert name="content">
-	
-	</ui:insert>
+	<div class="container-fluid">
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="../index.html"> <h:graphicImage
+						library="default" name="img/logo.jpg"
+						style="width: 35px; height: 35px; border-radius: 30px;" />
+				</a>
+			</div>
+			<h2 class="navbar-text">Aerolinea el ganso sónico
+				(Administrador)</h2>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false">Bienvenido Administrador <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="upload.html">Subir Datos</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="reports.html">Reportes</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="index.html">Salir</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		</nav>
+	</div>
+	<div class="container">
+		<ui:insert name="content">
+
+		</ui:insert>
+	</div>
 </h:body>
 </html>
