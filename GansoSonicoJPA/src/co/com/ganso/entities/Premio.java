@@ -18,11 +18,15 @@ import javax.persistence.Table;
 @Table(name="TB_PREMIO")
 @NamedQuery(name="Premio.findAll", query="SELECT p FROM Premio p")
 public class Premio extends EntityCore implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7579554409168842706L;
 
 	@Id
 	@Column(name="N_IDPREMIO")
-	private long nIdpremio;
+	private BigDecimal nIdpremio;
 
 	@Column(name="N_VALORMILLAS")
 	private BigDecimal nValormillas;
@@ -42,11 +46,11 @@ public class Premio extends EntityCore implements Serializable {
 	public Premio() {
 	}
 
-	public long getNIdpremio() {
+	public BigDecimal getNIdpremio() {
 		return this.nIdpremio;
 	}
 
-	public void setNIdpremio(long nIdpremio) {
+	public void setNIdpremio(BigDecimal nIdpremio) {
 		this.nIdpremio = nIdpremio;
 	}
 

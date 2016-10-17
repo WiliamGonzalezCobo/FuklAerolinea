@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Premio" visible="#{popupPremiosBean.visiblePopup}" rendered="#{popupPremiosBean.visiblePopup}" modal="true" resizable="false" position="center" draggable="false"
+		closable="true" closeOnEscape="false" width="380px">
+		<p:ajax event="close" update=":popups" listener="#{popupPremiosBean.ocultarAjax}" />
+		<h:form id="form_popuppremio">
+			<h:panelGrid columns="3">
+				<p:outputLabel for="idpremio" value="ID:" /> 
+				<p:inputText id="idpremio" value="#{popupPremiosBean.premio.NIdpremio}" disabled="true" />
+				<p:message for="idpremio" />
+
+				<p:outputLabel for="nombre" value="Nombre:" />
+					<p:inputText id="nombre" value="#{popupPremiosBean.premio.TNombrepremio}" styleClass="x-large" />
+				<p:message for="nombre" />
+				
+				<p:outputLabel for="descripcion" value="Descripcion:" />
+					<p:inputTextarea id="descripcion" value="#{popupPremiosBean.premio.TDescripcion}" styleClass="x-large" cols="50" rows="15"/>
+				<p:message for="descripcion" />
+
+				<p:outputLabel for="valorMillas" value="Valor Millas:" />
+					<p:inputNumber id="valorMillas" value="#{popupPremiosBean.premio.NValormillas}" minValue="0" decimalPlaces="0" />
+				<p:message for="valorMillas" />
+				
+				<p:outputLabel for="estado" value="Estado:" />
+				<p:selectOneRadio id="estado" value="#{popupPremiosBean.premio.TActivo}">
+					<f:selectItem itemLabel="Activo" itemValue="S" />
+					<f:selectItem itemLabel="Inactivo" itemValue="N" />
+				</p:selectOneRadio>
+				<p:message for="estado" />
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" style="width:150px; margin: 0 auto">
+				<p:commandButton value="Guardar" action="#{popupPremiosBean.guardar}"  update=":form_premios" />
+				<p:commandButton value="Eliminar" action="#{popupPremiosBean.eliminar}" update=":form_premios" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

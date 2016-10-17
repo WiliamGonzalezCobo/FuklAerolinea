@@ -30,13 +30,13 @@ public class ManagerSvc implements IManagerSvc {
 	}
 
 	@Override
-	public void edit(EntityCore entityCore) throws IllegalOrphanException, NonexistentEntityException, Exception {
+	public void update(EntityCore entityCore) throws IllegalOrphanException, NonexistentEntityException, Exception {
 		em.merge(entityCore);
 	}
 
 	@Override
-	public void destroy(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException {
-		EntityCore entityCore = em.getReference(EntityCore.class, id);
+	public void delete(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException {
+		em.getReference(EntityCore.class, id);
 	}
 
 	@Override
@@ -59,12 +59,8 @@ public class ManagerSvc implements IManagerSvc {
 	}
 
 	@Override
-	public EntityCore findEntityCore(BigDecimal id) {
-		try {
-			return em.find(EntityCore.class, id);
-		} finally {
-			em.close();
-		}
+	public <T> T findById(Class<T> clase, Object id) throws Exception{
+		return em.find(clase, id);
 	}
 
 	@Override

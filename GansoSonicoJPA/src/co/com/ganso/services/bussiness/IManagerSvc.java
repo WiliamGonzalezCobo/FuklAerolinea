@@ -15,15 +15,15 @@ public interface IManagerSvc {
 
 	public void create(EntityCore entityCore) throws PreexistingEntityException, Exception;
 
-	public void edit(EntityCore entityCore) throws IllegalOrphanException, NonexistentEntityException, Exception;
+	public void update(EntityCore entityCore) throws IllegalOrphanException, NonexistentEntityException, Exception;
 
-	public void destroy(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException;
+	public void delete(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException;
 
-	public <T> List<T> findAll(Class<T> clase);
+	public <T> List<T> findAll(Class<T> clase)throws Exception;
 
-	public <T> List<T> findLimit(int maxResults, int firstResult, Class<T> clase);
+	public <T> List<T> findLimit(int maxResults, int firstResult, Class<T> clase)throws Exception;
 
-	public <T> T findEntityCore(BigDecimal id);
+	public <T> T findById(Class<T> clase, Object id)throws Exception;
 
-	public int getEntityCoreCount();
+	public int getEntityCoreCount()throws Exception;
 }

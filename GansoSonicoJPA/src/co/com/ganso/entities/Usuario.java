@@ -32,6 +32,12 @@ public class Usuario implements Serializable {
 
 	@Column(name="T_PASS")
 	private String tPass;
+	
+	@Column(name="T_ADMINISTRADOR")
+	private String tAdministrador;
+	
+	@Column(name="T_CLIENTE")
+	private String tCliente;
 
 	public Usuario() {
 	}
@@ -82,6 +88,22 @@ public class Usuario implements Serializable {
 
 	public void setTPass(String tPass) {
 		this.tPass = tPass;
+	}
+
+	public String getTAdministrador() {
+		return tAdministrador;
+	}
+
+	public void setTAdministrador(String tAdministrador) {
+		this.tAdministrador = tAdministrador;
+	}
+
+	public String getTCliente() {
+		return tCliente;
+	}
+
+	public void setTCliente(String tCliente) {
+		this.tCliente = tCliente;
 	}
 
 }

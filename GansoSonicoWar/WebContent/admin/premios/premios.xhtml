@@ -9,33 +9,40 @@
 		<div class="row">
 			<h1>Premios</h1>
 			<h3>Premios que puedes redimir con nuestro plan de millas</h3>
-			<br/>
-			<br/>
+			<br /> <br />
 			<div class="row">
 				<h:form id="form_premios">
-					<p:dataTable var="premio" value="#{premiosBean.listadoPremios}" emptyMessage="No se encontraron registros." rows="50" paginator="true" paginatorPosition="bottom">
-						<p:column headerText="Premio:" filterBy="#{premio.TNombrepremio}" filterMatchMode="contains">
-							<h:panelGrid columns="1" styleClass="tabla-no-borde">
+					<h:panelGrid columns="1" style="margin-bottom:10px;">
+						<h:commandButton action="#{premiosBean.nuevoPremio}" value="Nuevo" />
+					</h:panelGrid>
+
+					<h:panelGroup layout="block" style="width: 100%">
+						<p:dataTable var="premio" value="#{premiosBean.listadoPremios}" emptyMessage="No se encontraron registros." rows="50" paginator="true" paginatorPosition="bottom" selectionMode="single"
+							selection="#{premiosBean.premioSeleccionado}" rowKey="#{premio.NIdpremio}">
+
+							<p:ajax event="rowSelect" listener="#{premiosBean.verPremio}" update=":popups" />
+
+							<p:column headerText="Premio:" filterBy="#{premio.TNombrepremio}" filterMatchMode="contains" style="width:250px;">
 								<h:outputText value="#{premio.TNombrepremio}" />
-							</h:panelGrid>
-						</p:column>
+							</p:column>
 
-						<p:column headerText="Descripcion:" filterBy="#{premio.TDescripcion}" filterMatchMode="contains" style="width:250px;">
-							<h:panelGrid columns="1" styleClass="tabla-no-borde">
+							<p:column headerText="Descripcion:" filterBy="#{premio.TDescripcion}" filterMatchMode="contains">
 								<h:outputText value="#{premio.TDescripcion}" />
-							</h:panelGrid>
-						</p:column>
-
-						<p:column headerText="Valor En Millas:" filterBy="#{premio.dFechahorasalida}" filterMatchMode="contains" style="width:250px;">
-							<h:outputText value="#{premio.NValormillas}">
-								<f:convertNumber pattern="###,###" currencySymbol="$" type="currency" />
-							</h:outputText>
-						</p:column>
-
-					</p:dataTable>
+							</p:column>
+							
+							<p:column headerText="Estado:" filterBy="#{premio.TActivo}" filterMatchMode="contains">
+								<h:outputText value="#{premiosBean.estado[premio.TActivo]}" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGroup>
 				</h:form>
 			</div>
 		</div>
+
+		<h:panelGroup id="popups">
+			<ui:include src="/popupPremios.xhtml" />
+		</h:panelGroup>
+
 	</ui:define>
 
 </ui:composition>

@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Vuelo" visible="#{popupVuelosBean.visiblePopup}" rendered="#{popupVuelosBean.visiblePopup}" modal="true" resizable="false" position="center" draggable="false"
+		closable="true" closeOnEscape="false" width="380px">
+		<p:ajax event="close" update=":popups" listener="#{popupVuelosBean.ocultarAjax}" />
+		<h:form id="form_popupvuelo">
+			<h:panelGrid columns="3">
+				<p:outputLabel for="idvuelo" value="ID:" />
+				<p:inputText id="idvuelo" value="#{popupVuelosBean.vuelo.NIdvuelo}" disabled="true" />
+				<p:message for="idvuelo" />
+
+				<p:outputLabel for="origen" value="Origen:" />
+				<h:panelGrid columns="2">
+					<p:inputText id="origen" value="#{popupVuelosBean.vuelo.TOrigen} - #{popupVuelosBean.vuelo.origen.TNombre} (#{popupVuelosBean.vuelo.origen.TCiudad})" readonly="true" styleClass="x-large" />
+					<p:commandButton action="#{popupVuelosBean.verOrigen}" id="aeropuertoorigen" update="origen :popups" icon="ui-icon-carat-1-ne" title="Ver Aeropuertos" />
+				</h:panelGrid>
+				<p:message for="origen" />
+
+				<p:outputLabel for="destino" value="Destino:" />
+				<h:panelGrid columns="2">
+					<p:inputText id="destino" value="#{popupVuelosBean.vuelo.TDestino} - #{popupVuelosBean.vuelo.destino.TNombre} (#{popupVuelosBean.vuelo.destino.TCiudad})" readonly="true" styleClass="x-large" />
+					<p:commandButton action="#{popupVuelosBean.verDestino}" id="aeropuertodestino" update="destino :popups" icon="ui-icon-carat-1-ne" title="Ver Aeropuertos" />
+				</h:panelGrid>
+				<p:message for="destino" />
+
+				<p:outputLabel for="fecha" value="Fecha:" />
+				<p:calendar id="fecha" value="#{popupVuelosBean.vuelo.DFechahorasalida}" navigator="true" pattern="dd/MM/yyyy HH:mm" locale="co" />
+				<p:message for="fecha" />
+
+				<p:outputLabel for="capacidad" value="Capacidad:" />
+				<p:inputNumber id="capacidad" value="#{popupVuelosBean.vuelo.NCapacidad}" minValue="0" decimalPlaces="0" />
+				<p:message for="capacidad" />
+
+				<p:outputLabel for="valorbase" value="Valor Base:" />
+				<p:inputText id="valorbase" value="#{popupVuelosBean.vuelo.NValorbase}" minValue="0" decimalPlaces="2" />
+				<p:message for="valorbase" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" style="width:150px; margin: 0 auto">
+				<p:commandButton value="Guardar" action="#{popupVuelosBean.guardar}"  update=":form_vuelos" />
+				<p:commandButton value="Eliminar" action="#{popupVuelosBean.eliminar}" update=":form_vuelos" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

@@ -17,7 +17,7 @@ public class FactorPrecio implements Serializable {
 
 	@Id
 	@Column(name="N_IDFACTOR")
-	private long nIdfactor;
+	private BigDecimal nIdfactor;
 
 	@Column(name="N_CLASE")
 	private BigDecimal nClase;
@@ -31,11 +31,11 @@ public class FactorPrecio implements Serializable {
 	public FactorPrecio() {
 	}
 
-	public long getNIdfactor() {
+	public BigDecimal getNIdfactor() {
 		return this.nIdfactor;
 	}
 
-	public void setNIdfactor(long nIdfactor) {
+	public void setNIdfactor(BigDecimal nIdfactor) {
 		this.nIdfactor = nIdfactor;
 	}
 

@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Aeropuertos" visible="#{popupAeropuertosBean.visiblePopup}" rendered="#{popupAeropuertosBean.visiblePopup}" modal="true" resizable="false" closable="true" position="center"
+		draggable="false" width="700px">
+		<p:ajax event="close" update=":popups" listener="#{popupAeropuertosBean.ocultarAjax}" />
+		<h:form id="form_popupaeropuerto">
+			<p:dataTable var="aeropuerto" value="#{popupAeropuertosBean.aeropuertos}" emptyMessage="No se encontraron registros." rows="10" paginator="true" paginatorPosition="bottom" selectionMode="single"
+				selection="#{popupAeropuertosBean.aeropuertoSeleccionado}" rowKey="#{aeropuerto.TCodigo}">
+
+				<p:ajax event="rowSelect" listener="#{popupAeropuertosBean.seleccionar}" update=":popups" />
+
+				<p:column headerText="Codigo:" filterBy="#{aeropuerto.TCodigo}" filterMatchMode="contains" width="35px">
+					<h:outputText value="#{aeropuerto.TCodigo}" />
+				</p:column>
+
+				<p:column headerText="Nombre:" filterBy="#{aeropuerto.TNombre}" filterMatchMode="contains">
+					<h:outputText value="#{aeropuerto.TNombre}" />
+				</p:column>
+
+				<p:column headerText="Pais:" filterBy="#{aeropuerto.TPais}" filterMatchMode="contains">
+					<h:outputText value="#{aeropuerto.TPais}" />
+				</p:column>
+
+				<p:column headerText="Ciudad:" filterBy="#{aeropuerto.TCiudad}" filterMatchMode="contains">
+					<h:outputText value="#{aeropuerto.TCiudad}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
