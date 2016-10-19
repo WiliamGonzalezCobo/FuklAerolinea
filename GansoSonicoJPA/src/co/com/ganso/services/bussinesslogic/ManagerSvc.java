@@ -1,3 +1,4 @@
+/*ManagerSvc*/
 package co.com.ganso.services.bussinesslogic;
 
 import java.math.BigDecimal;
@@ -5,6 +6,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -13,6 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import co.com.ganso.entities.EntityCore;
+import co.com.ganso.entities.Usuario;
 import co.com.ganso.services.bussiness.IManagerSvc;
 import co.com.ganso.services.bussinesslogic.exceptions.IllegalOrphanException;
 import co.com.ganso.services.bussinesslogic.exceptions.NonexistentEntityException;
@@ -74,6 +77,23 @@ public class ManagerSvc implements IManagerSvc {
 		} finally {
 			em.close();
 		}
+	}
+	
+	@Override
+	public boolean acceder(Usuario usuario) throws Exception{
+		try{
+			Usuario buscarUsuario =  (Usuario) em.createNamedQuery("Usuario.findCredenciales")
+				    .setParameter("username", usuario.getTLogin())
+				    .setParameter("password", usuario.getTPass())
+				    .setParameter("type", "S")
+				    .getSingleResult();
+					
+						return true;
+					
+		}catch(NoResultException e) {
+			return false;
+	    }
+		
 	}
 
 }

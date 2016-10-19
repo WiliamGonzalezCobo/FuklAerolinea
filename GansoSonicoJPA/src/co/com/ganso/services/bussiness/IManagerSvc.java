@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import co.com.ganso.entities.EntityCore;
+import co.com.ganso.entities.Usuario;
 import co.com.ganso.services.bussinesslogic.exceptions.IllegalOrphanException;
 import co.com.ganso.services.bussinesslogic.exceptions.NonexistentEntityException;
 import co.com.ganso.services.bussinesslogic.exceptions.PreexistingEntityException;
@@ -26,4 +27,6 @@ public interface IManagerSvc {
 	public <T> T findById(Class<T> clase, Object id)throws Exception;
 
 	public int getEntityCoreCount()throws Exception;
+	
+	public boolean acceder(Usuario usuario)throws Exception;
 }
