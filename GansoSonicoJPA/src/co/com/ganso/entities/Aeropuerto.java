@@ -1,7 +1,15 @@
 package co.com.ganso.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 
 /**
@@ -11,7 +19,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="TB_AEROPUERTO")
 @NamedQuery(name="Aeropuerto.findAll", query="SELECT a FROM Aeropuerto a")
-public class Aeropuerto implements Serializable {
+public class Aeropuerto extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,6 +37,10 @@ public class Aeropuerto implements Serializable {
 
 	@Column(name="T_TIPO")
 	private String tTipo;
+	
+	@PrimaryKeyJoinColumn(name = "T_PAIS", referencedColumnName = "T_CODIGO")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Pais pais;
 
 	public Aeropuerto() {
 	}
@@ -71,6 +83,14 @@ public class Aeropuerto implements Serializable {
 
 	public void setTTipo(String tTipo) {
 		this.tTipo = tTipo;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
 
 }

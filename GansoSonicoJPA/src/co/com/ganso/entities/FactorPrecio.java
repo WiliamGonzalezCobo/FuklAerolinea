@@ -1,7 +1,9 @@
 package co.com.ganso.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 
 
@@ -12,7 +14,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="TB_FACTORPRECIO")
 @NamedQuery(name="FactorPrecio.findAll", query="SELECT f FROM FactorPrecio f")
-public class FactorPrecio implements Serializable {
+public class FactorPrecio extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,6 +29,9 @@ public class FactorPrecio implements Serializable {
 
 	@Column(name="T_DESCRIPCION")
 	private String tDescripcion;
+	
+	@Column(name="N_DIA")
+	private Integer nDia;
 
 	public FactorPrecio() {
 	}
@@ -61,6 +66,14 @@ public class FactorPrecio implements Serializable {
 
 	public void setTDescripcion(String tDescripcion) {
 		this.tDescripcion = tDescripcion;
+	}
+
+	public Integer getNDia() {
+		return nDia;
+	}
+
+	public void setNDia(Integer nDia) {
+		this.nDia = nDia;
 	}
 
 }

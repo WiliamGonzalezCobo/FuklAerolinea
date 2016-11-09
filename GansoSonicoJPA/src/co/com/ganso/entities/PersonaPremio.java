@@ -1,7 +1,9 @@
 package co.com.ganso.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,12 +15,12 @@ import java.util.Date;
 @Entity
 @Table(name="TB_PERSONAPREMIO")
 @NamedQuery(name="PersonaPremio.findAll", query="SELECT p FROM PersonaPremio p")
-public class PersonaPremio implements Serializable {
+public class PersonaPremio extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="N_IDPERSONAPREMIO")
-	private long nIdpersonapremio;
+	private BigDecimal nIdpersonapremio;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="D_FECHACOMPRA")
@@ -36,11 +38,11 @@ public class PersonaPremio implements Serializable {
 	public PersonaPremio() {
 	}
 
-	public long getNIdpersonapremio() {
+	public BigDecimal getNIdpersonapremio() {
 		return this.nIdpersonapremio;
 	}
 
-	public void setNIdpersonapremio(long nIdpersonapremio) {
+	public void setNIdpersonapremio(BigDecimal nIdpersonapremio) {
 		this.nIdpersonapremio = nIdpersonapremio;
 	}
 

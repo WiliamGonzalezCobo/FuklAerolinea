@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">  
+
+	<p:dialog header="Vuelos" visible="#{popupListaVueloBean.visiblePopup}" rendered="#{popupListaVueloBean.visiblePopup}" modal="true" resizable="false" closable="true" position="center"
+		draggable="false" width="500px">
+		<p:ajax event="close" update=":popups" listener="#{popupListaVueloBean.ocultarAjax}" />
+		<h:form id="form_popupvuelo">
+			<p:dataTable var="vuelo" value="#{popupListaVueloBean.vuelos}" emptyMessage="No se encontraron registros." rows="10" paginator="true" paginatorPosition="bottom" selectionMode="single"
+				selection="#{popupListaVueloBean.vueloSeleccionado}" rowKey="#{vuelo.NIdvuelo}">
+
+				<p:ajax event="rowSelect" listener="#{popupListaVueloBean.seleccionar}" update=":popups" />
+
+				<p:column headerText="Origen:" filterBy="#{vuelo.origen.TNombre} #{vuelo.origen.TCiudad}" filterMatchMode="contains">
+					<h:outputText value="#{vuelo.origen.TNombre} #{vuelo.origen.TCiudad}" />
+				</p:column>
+
+				<p:column headerText="Destino:" filterBy="#{vuelo.destino.TNombre} #{vuelo.destino.TCiudad}" filterMatchMode="contains">
+					<h:outputText value="#{vuelo.destino.TNombre} #{vuelo.destino.TCiudad}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

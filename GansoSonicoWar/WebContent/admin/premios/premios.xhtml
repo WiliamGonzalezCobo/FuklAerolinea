@@ -30,7 +30,7 @@
 								<h:outputText value="#{premio.TDescripcion}" />
 							</p:column>
 							
-							<p:column headerText="Estado:" filterBy="#{premio.TActivo}" filterMatchMode="contains">
+							<p:column headerText="Estado:" filterBy="#{premio.TActivo}" filterMatchMode="contains" style="width:150px;">
 								<h:outputText value="#{premiosBean.estado[premio.TActivo]}" />
 							</p:column>
 						</p:dataTable>
@@ -40,7 +40,7 @@
 		</div>
 
 		<h:panelGroup id="popups">
-			<ui:include src="/popupPremios.xhtml" />
+			<ui:include src="/admin/popups/popupPremios.xhtml" />
 		</h:panelGroup>
 
 	</ui:define>

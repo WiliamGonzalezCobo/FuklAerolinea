@@ -7,12 +7,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-
-
-
 import co.com.ganso.entities.Usuario;
 import co.com.ganso.nucleo.bean.BackingUI;
-import co.com.ganso.services.bussiness.IManagerSvc;
+import co.com.ganso.services.bussiness.IUsuarioSvc;
 
 
 @ManagedBean(name = "login")
@@ -22,7 +19,7 @@ public class LoginBean extends BackingUI implements Serializable {
 	private static final long serialVersionUID = 8918479798475119956L;
 	
 	@EJB
-	private IManagerSvc managerSvc;
+	private IUsuarioSvc usuarioSvc;
 	
 	private Usuario usuario;
 	private String password;
@@ -39,7 +36,7 @@ public class LoginBean extends BackingUI implements Serializable {
 			usuario.setTPass(password);
 			usuario.setTAdministrador("S");
 
-			if (managerSvc.acceder(usuario)) {
+			if (usuarioSvc.acceder(usuario)) {
 				dialogInfo("Acceso Correcto");
 				return "admin/premios/premios.xhtml";
 

@@ -21,8 +21,8 @@
 					<h:outputText value="#{aeropuerto.TNombre}" />
 				</p:column>
 
-				<p:column headerText="Pais:" filterBy="#{aeropuerto.TPais}" filterMatchMode="contains">
-					<h:outputText value="#{aeropuerto.TPais}" />
+				<p:column headerText="Pais:" filterBy="#{aeropuerto.pais.TNombre} #{aeropuerto.TPais}" filterMatchMode="contains">
+					<h:outputText value="#{aeropuerto.pais.TNombre} - (#{aeropuerto.TPais})" />
 				</p:column>
 
 				<p:column headerText="Ciudad:" filterBy="#{aeropuerto.TCiudad}" filterMatchMode="contains">

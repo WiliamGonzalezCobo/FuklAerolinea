@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Itinerario" visible="#{popupItinerarioBean.visiblePopup}" rendered="#{popupItinerarioBean.visiblePopup}" modal="true" resizable="false" position="center" draggable="false"
+		closable="true" closeOnEscape="false" width="600px">
+		<p:ajax event="close" update=":popups" listener="#{popupItinerarioBean.ocultarAjax}" />
+		<h:form id="form_popupitinerario">
+			<p:tabView>
+				<p:tab title="Datos">
+					<h:panelGrid columns="3">
+						<p:outputLabel for="iditinerario" value="ID:" />
+						<p:inputText id="iditinerario" value="#{popupItinerarioBean.itinerario.NIditinerario}" disabled="true" />
+						<p:message for="iditinerario" />
+
+						<p:outputLabel for="origen" value="Origen:" />
+						<h:panelGrid columns="2">
+							<p:inputText id="origen" value="#{popupItinerarioBean.itinerario.TOrigen} - #{popupItinerarioBean.itinerario.origen.TNombre} (#{popupItinerarioBean.itinerario.origen.TCiudad})" readonly="true"
+								styleClass="x-large" />
+							<p:commandButton action="#{popupItinerarioBean.verOrigen}" id="aeropuertoorigen" update="origen :popups" icon="ui-icon-carat-1-ne" title="Ver Aeropuertos" />
+						</h:panelGrid>
+						<p:message for="origen" />
+
+						<p:outputLabel for="destino" value="Destino:" />
+						<h:panelGrid columns="2">
+							<p:inputText id="destino" value="#{popupItinerarioBean.itinerario.TDestino} - #{popupItinerarioBean.itinerario.destino.TNombre} (#{popupItinerarioBean.itinerario.destino.TCiudad})"
+								readonly="true" styleClass="x-large" />
+							<p:commandButton action="#{popupItinerarioBean.verDestino}" id="aeropuertodestino" update="destino :popups" icon="ui-icon-carat-1-ne" title="Ver Aeropuertos" />
+						</h:panelGrid>
+						<p:message for="destino" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2" style="width:150px; margin: 0 auto">
+						<p:commandButton value="Guardar" action="#{popupItinerarioBean.guardar}" update=":form_itinerarios" />
+						<p:commandButton value="Eliminar" action="#{popupItinerarioBean.eliminar}" update=":form_itinerarios" />
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Escalas">
+					<p:dataTable id="tabla_escala" var="escala" value="#{popupItinerarioBean.escalas}" emptyMessage="No se encontraron registros." rows="15" paginator="true" paginatorPosition="bottom">
+
+						<p:column headerText="Origen:">
+							<h:outputText value="#{escala.vuelo.origen.TNombre} (#{escala.vuelo.origen.TCiudad})" />
+							<f:facet name="footer">
+								<p:inputText id="escalaOrigen" value="#{popupItinerarioBean.escala.vuelo.origen.TNombre} #{popupItinerarioBean.escala.vuelo.origen.TCiudad}" readonly="true"
+									styleClass="medium" />
+							</f:facet>
+						</p:column>
+
+						<p:column headerText="Destino:">
+							<h:outputText value="#{escala.vuelo.destino.TNombre} (#{escala.vuelo.destino.TCiudad})" />
+							<f:facet name="footer">
+								<h:panelGrid columns="2" styleClass="tabla-no-borde" columnClasses="pr-division, sd-division">
+									<p:inputText id="escalaDestino" value="#{popupItinerarioBean.escala.vuelo.destino.TNombre} #{popupItinerarioBean.escala.vuelo.destino.TCiudad}"
+										readonly="true" styleClass="medium" />
+									<p:commandButton action="#{popupItinerarioBean.verVuelos}" id="escalaVuelo" update=":popups" icon="ui-icon-carat-1-ne" title="Ver Vuelos" />
+								</h:panelGrid>
+							</f:facet>
+						</p:column>
+						
+						<p:column style="width:40px">
+							<p:commandButton action="#{popupItinerarioBean.eliminarEscala}" id="eliminarEscala" update="tabla_escala" icon="ui-icon-carat-1-ne" title="Eliminar Escala" />
+							<f:facet name="footer">
+								<p:commandButton action="#{popupItinerarioBean.adicionarEscala}" id="adicionarEscala" update="tabla_escala" icon="ui-icon-carat-1-ne" title="Adicionar Escala" />
+							</f:facet>
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

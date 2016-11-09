@@ -46,7 +46,7 @@ public class PopupAeropuertosBean extends BackingPopupUI {
 	}
 	
 	private void cargarAeropuertos() throws Exception{
-		aeropuertos = managerSvc.findAll(Aeropuerto.class);
+		aeropuertos = managerSvc.findList(new Aeropuerto(), "Aeropuerto.findAll");
 	}
 	
 	public void seleccionar(SelectEvent se){

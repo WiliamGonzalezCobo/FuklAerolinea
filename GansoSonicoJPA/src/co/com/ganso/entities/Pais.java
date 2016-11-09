@@ -1,6 +1,7 @@
 package co.com.ganso.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="TB_PAIS")
 @NamedQuery(name="Pais.findAll", query="SELECT p FROM Pais p")
-public class Pais implements Serializable {
+public class Pais extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -19,70 +19,43 @@
 
 </h:head>
 <h:body>
-	<div class="container-fluid ">
+	<header>
 		<nav class="navbar navbar-default">
-		<div class="container-fluid" >
-			<div class="navbar-header">
-				<a class="navbar-brand" href="http://localhost:8180/gansosonico/index.xhtml"> <h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" />
-				</a>
-			</div>
-			<h2 class="navbar-text">Aerolinea el ganso sónico (Administrador)</h2>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido Administrador <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-					
-						<li><a href="http://localhost:8180/gansosonico/admin/carga/cargarArchivo.jsf">Cargar Json</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="http://localhost:8180/gansosonico/admin/vuelos/vuelos.jsf">Vuelos</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="http://localhost:8180/gansosonico/admin/premios/premios.jsf">Premios</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="http://localhost:8180/gansosonico/index.xhtml">Salir</a></li>
+			<div class="container-fluid" >
+				<div class="navbar-header">
+					<a class="navbar-brand" href="http://localhost:8180/gansosonico/index.xhtml"> <h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" />
+					</a>
+				</div>
+				<h2 class="navbar-text">Aerolinea el ganso sónico (Administrador)</h2>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido Administrador <span class="caret"></span></a>
+						<ul class="dropdown-menu">
 						
-					</ul>
-				</li>
-			</ul>
-		</div>
+							<li><a href="http://localhost:8180/gansosonico/admin/carga/cargarArchivo.jsf">Cargar Json</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="http://localhost:8180/gansosonico/admin/vuelos/vuelos.jsf">Vuelos</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="http://localhost:8180/gansosonico/admin/premios/premios.jsf">Premios</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="http://localhost:8180/gansosonico/index.xhtml">Salir</a></li>
+							
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</nav>
-	</div>
-	<div class="container">
+	</header>
+	<div class="container work-area">
 		<ui:insert name="content">
 
 		</ui:insert>
 	</div>
 
-	<div class="container-fluid">
-		<footer class="footer-distributed">
-			<div class="footer-left">
-				<h3>Ganso Sonico<span><h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" /></span></h3>
-				<p class="footer-company-name">Aerolinea &copy; 2016</p>
-			</div>
-			<div class="footer-center">
-				<div>
-					<i class="fa fa-map-marker"></i>
-					<p><span>Calle Falsa 123</span> Bogotá, Colombia</p>
-				</div>
-				<div>
-					<i class="fa fa-phone"></i>
-					<p>+1 555 123456</p>
-				</div>
-	
-				<div>
-					<i class="fa fa-envelope"></i>
-					<p><a href="mailto:support@gansosonico.com">support@gansosonico.com</a></p>
-				</div>
-			</div>
-	
-			<div class="footer-right">
-				<p class="footer-company-about">
-					<span>About the company</span> Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-				</p>
-				<div class="footer-icons">
-					<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-github"></i></a>
-				</div>
-			</div>
-		</footer>
-	</div>
+	<footer class="info-footer">
+		<h3><h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" /></h3>
+		<h3>Ganso Sonico</h3>
+		<p class="footer-company-name">Aerolinea &copy; 2016</p>
+	</footer>
 
 	<ui:insert name="popups">
 

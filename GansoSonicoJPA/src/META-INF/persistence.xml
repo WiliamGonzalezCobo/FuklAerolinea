@@ -16,6 +16,8 @@
 		<class>co.com.ganso.entities.Premio</class>
 		<class>co.com.ganso.entities.Usuario</class>
 		<class>co.com.ganso.entities.Vuelo</class>
+		<class>co.com.ganso.entities.Itinerario</class>
+		<class>co.com.ganso.entities.TbVueloitinerario</class>
 		<properties>
 			<property name="eclipselink.target-database" value="HSQL" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />

@@ -1,21 +1,18 @@
-/*ManagerSvc*/
 package co.com.ganso.services.bussinesslogic;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import co.com.ganso.entities.EntityCore;
-import co.com.ganso.entities.Usuario;
 import co.com.ganso.services.bussiness.IManagerSvc;
 import co.com.ganso.services.bussinesslogic.exceptions.IllegalOrphanException;
 import co.com.ganso.services.bussinesslogic.exceptions.NonexistentEntityException;
@@ -42,58 +39,76 @@ public class ManagerSvc implements IManagerSvc {
 		em.getReference(EntityCore.class, id);
 	}
 
-	@Override
-	public <T> List<T> findAll(Class<T> clase) {
-		return findRegister(true, -1, -1, clase);
-	}
+//	@Override
+//	public <T> List<T> findAll(Class<T> clase) {
+//		return findRegister(true, -1, -1, clase);
+//	}
 
-	@Override
-	public <T> List<T> findLimit(int maxResults, int firstResult, Class<T> clase) {
-		return findRegister(false, maxResults, firstResult, clase);
-	}
+//	@Override
+//	public <T> List<T> findLimit(int maxResults, int firstResult, Class<T> clase) {
+//		return findRegister(false, maxResults, firstResult, clase);
+//	}
 
-	private <T> List<T> findRegister(boolean all, int maxResults, int firstResult, Class<T> clase) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<T> cq = cb.createQuery(clase);
-		Root<T> rootEntry = cq.from(clase);
-		CriteriaQuery<T> todos = cq.select(rootEntry);
-		TypedQuery<T> allQuery = em.createQuery(todos);
-		return allQuery.getResultList();
-	}
+//	private <T> List<T> findRegister(boolean all, int maxResults, int firstResult, Class<T> clase) {
+//		CriteriaBuilder cb = em.getCriteriaBuilder();
+//		CriteriaQuery<T> cq = cb.createQuery(clase);
+//		Root<T> rootEntry = cq.from(clase);
+//		CriteriaQuery<T> todos = cq.select(rootEntry);
+//		TypedQuery<T> allQuery = em.createQuery(todos)
+//								   .setFirstResult(firstResult)
+//								   .setMaxResults(maxResults);
+//		return allQuery.getResultList();
+//	}
 
-	@Override
-	public <T> T findById(Class<T> clase, Object id) throws Exception{
-		return em.find(clase, id);
-	}
-
-	@Override
-	public int getEntityCoreCount() {
-		try {
-			CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-			Root<EntityCore> rt = cq.from(EntityCore.class);
-			cq.select(em.getCriteriaBuilder().count(rt));
-			Query q = em.createQuery(cq);
-			return ((Long) q.getSingleResult()).intValue();
-		} finally {
-			em.close();
+//	@Override
+//	public <T> T findById(Class<T> clase, Object id) throws Exception{
+//		return em.find(clase, id);
+//	}
+	
+	@SuppressWarnings("unchecked")
+	public <T extends EntityCore> List<T> findList(EntityCore entity, String nameQuery) throws Exception{
+		Map<String, Object> mapaParametros = buildMapParameters(entity);
+		Query query = em.createNamedQuery(nameQuery);
+		for (Entry<String, Object> entry : mapaParametros.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
 		}
+		
+		List<T> list = query.getResultList();
+		
+		return list;
 	}
 	
-	@Override
-	public boolean acceder(Usuario usuario) throws Exception{
-		try{
-			Usuario buscarUsuario =  (Usuario) em.createNamedQuery("Usuario.findCredenciales")
-				    .setParameter("username", usuario.getTLogin())
-				    .setParameter("password", usuario.getTPass())
-				    .setParameter("type", "S")
-				    .getSingleResult();
-					
-						return true;
-					
-		}catch(NoResultException e) {
-			return false;
-	    }
-		
-	}
+	@SuppressWarnings("unchecked")
+	public <T extends EntityCore> T findObject(EntityCore entity, String nameQuery) throws Exception {
+		try {
+			List<?> resultado = findList(entity, nameQuery);
+			if (resultado.size() != 0) {
+				return (T) resultado.get(0);
+			}
+		} catch (javax.persistence.NoResultException e) {
+		}
 
+		return null;
+	}
+	
+	private Map<String, Object> buildMapParameters(EntityCore entity) throws Exception {
+		Object objeto;
+		Map<String, Object> mapaParametros = new HashMap<String, Object>();
+		for (Method metodo : entity.getClass().getMethods()) {
+			if (!metodo.getName().toUpperCase().startsWith("GET") || metodo.getAnnotation(AnotacionParametro.class) == null) {
+				continue;
+			}
+			objeto = metodo.invoke(entity);
+			if(objeto == null){
+				continue;
+			}
+			mapaParametros.put(obtenerNombreCampo(metodo.getName()), objeto);
+		}
+		return mapaParametros;
+	}
+	
+	private String obtenerNombreCampo(String name) {
+		name = name.replaceAll("get", "");
+		return name.substring(0, 1).toLowerCase() + name.substring(1);
+	}
 }
