@@ -5,7 +5,7 @@ import javax.ejb.Local;
 import co.com.ganso.entities.Usuario;
 
 @Local
-public interface IUsuarioSvc {
+public interface IUsuarioSvc { 
 	
 	public boolean acceder(Usuario usuario) throws Exception;
 
