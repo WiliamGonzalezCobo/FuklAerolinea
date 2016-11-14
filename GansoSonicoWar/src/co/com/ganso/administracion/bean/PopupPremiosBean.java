@@ -65,7 +65,7 @@ public class PopupPremiosBean extends BackingPopupUI {
 
 	public void eliminar() {
 		try {
-			managerSvc.delete(premio.getNIdpremio());
+			managerSvc.delete(premio);
 			dialogInfo("Se ha eliminado el registro.");
 		} catch (Exception e) {
 			dialogError(e);

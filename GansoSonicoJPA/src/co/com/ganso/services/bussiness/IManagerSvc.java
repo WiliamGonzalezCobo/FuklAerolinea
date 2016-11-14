@@ -1,34 +1,21 @@
 package co.com.ganso.services.bussiness;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Local;
 
 import co.com.ganso.entities.EntityCore;
-import co.com.ganso.services.bussinesslogic.exceptions.IllegalOrphanException;
-import co.com.ganso.services.bussinesslogic.exceptions.NonexistentEntityException;
-import co.com.ganso.services.bussinesslogic.exceptions.PreexistingEntityException;
 
 @Local
 public interface IManagerSvc {
 
-	public void create(EntityCore entityCore) throws PreexistingEntityException, Exception;
+	public void create(EntityCore entityCore) throws Exception;
 
-	public void update(EntityCore entityCore) throws IllegalOrphanException, NonexistentEntityException, Exception;
+	public void update(EntityCore entityCore) throws Exception;
 
-	public void delete(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException;
+	public void delete(EntityCore entityCore) throws Exception;
 
-//	public <T> List<T> findAll(Class<T> clase)throws Exception;
-
-//	public <T> List<T> findLimit(int maxResults, int firstResult, Class<T> clase)throws Exception;
-
-//	public <T> T findById(Class<T> clase, Object id)throws Exception;
-	
 	public <T extends EntityCore> T findObject(EntityCore entity, String nameQuery) throws Exception;
 	
 	public <T extends EntityCore> List<T> findList(EntityCore entity, String nameQuery) throws Exception;
-	
-	
-
 }
