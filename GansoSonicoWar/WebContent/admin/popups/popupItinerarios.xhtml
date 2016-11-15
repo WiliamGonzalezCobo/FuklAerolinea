@@ -4,9 +4,9 @@
 				xmlns:h="http://java.sun.com/jsf/html"
 				xmlns:p="http://primefaces.org/ui">
 
-	<p:dialog header="Itinerario" visible="#{popupItinerarioBean.visiblePopup}" rendered="#{popupItinerarioBean.visiblePopup}" modal="true" resizable="false" position="center" draggable="false"
+	<p:dialog header="Itinerario" visible="#{popupItinerarioBean.visiblePopup}" rendered="#{popupItinerarioBean.visiblePopup}" resizable="false" position="center" draggable="false"
 		closable="true" closeOnEscape="false" width="600px">
-		<p:ajax event="close" update=":popups" listener="#{popupItinerarioBean.ocultarAjax}" />
+		<p:ajax event="close" update=":form_workarea" listener="#{popupItinerarioBean.ocultarAjax}" />
 		<h:form id="form_popupitinerario">	
 			<p:tabView id="tabPanel">
 				<p:tab title="Datos">
@@ -19,7 +19,7 @@
 						<h:panelGrid columns="2">
 							<p:inputText id="origen" value="#{popupItinerarioBean.itinerario.TOrigen} - #{popupItinerarioBean.itinerario.origen.TNombre} (#{popupItinerarioBean.itinerario.origen.TCiudad})" readonly="true"
 								styleClass="x-large" />
-							<p:commandButton action="#{popupItinerarioBean.verOrigen}" id="aeropuertoorigen" update="origen :popups" icon="ui-icon-carat-1-ne" title="Ver Aeropuertos" />
+							<p:commandButton action="#{popupItinerarioBean.verOrigen}" id="aeropuertoorigen" update=":form_workarea" icon="ui-icon-carat-1-ne" title="Ver Aeropuertos" />
 						</h:panelGrid>
 						<p:message for="origen" />
 
@@ -27,14 +27,18 @@
 						<h:panelGrid columns="2">
 							<p:inputText id="destino" value="#{popupItinerarioBean.itinerario.TDestino} - #{popupItinerarioBean.itinerario.destino.TNombre} (#{popupItinerarioBean.itinerario.destino.TCiudad})"
 								readonly="true" styleClass="x-large" />
-							<p:commandButton action="#{popupItinerarioBean.verDestino}" id="aeropuertodestino" update="destino :popups" icon="ui-icon-carat-1-ne" title="Ver Aeropuertos" />
+							<p:commandButton action="#{popupItinerarioBean.verDestino}" id="aeropuertodestino" update="destino :form_workarea" icon="ui-icon-carat-1-ne" title="Ver Aeropuertos" />
 						</h:panelGrid>
 						<p:message for="destino" />
+						
+						<p:outputLabel for="fecha" value="Fecha:" />
+						<p:calendar id="fecha" value="#{popupItinerarioBean.itinerario.DFecha}" navigator="true" pattern="dd/MM/yyyy HH:mm" locale="co" />
+						<p:message for="fecha" />
 					</h:panelGrid>
 
 					<h:panelGrid columns="2" style="width:150px; margin: 0 auto">
-						<p:commandButton value="Guardar" action="#{popupItinerarioBean.guardar}" update="tabPanel :form_itinerarios :popups" />
-						<p:commandButton value="Eliminar" action="#{popupItinerarioBean.eliminar}" update="tabPanel :form_itinerarios :popups" />
+						<p:commandButton value="Guardar" action="#{popupItinerarioBean.guardar}" update="tabPanel :form_itinerarios :form_workarea" />
+						<p:commandButton value="Eliminar" action="#{popupItinerarioBean.eliminar}" update="tabPanel :form_itinerarios :form_workarea" />
 					</h:panelGrid>
 				</p:tab>
 				
@@ -55,7 +59,7 @@
 								<h:panelGrid columns="2" styleClass="tabla-no-borde" columnClasses="pr-division, sd-division" rendered="#{popupItinerarioBean.itinerarioCompleto}">
 									<p:inputText id="escalaDestino" value="#{popupItinerarioBean.escala.vuelo.destino.TNombre} #{popupItinerarioBean.escala.vuelo.destino.TCiudad}"
 										readonly="true" styleClass="medium" />
-									<p:commandButton action="#{popupItinerarioBean.verVuelos}" id="escalaVuelo" update=":popups" icon="ui-icon-carat-1-ne" title="Ver Vuelos" />
+									<p:commandButton action="#{popupItinerarioBean.verVuelos}" id="escalaVuelo" update=":form_workarea" icon="ui-icon-carat-1-ne" title="Ver Vuelos" />
 								</h:panelGrid>
 							</f:facet>
 						</p:column>

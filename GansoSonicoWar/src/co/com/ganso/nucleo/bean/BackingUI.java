@@ -68,4 +68,10 @@ public abstract class BackingUI implements Serializable {
 		
 	}
 	
+	public String navegar(String regla){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		fc.getApplication().getNavigationHandler().handleNavigation(fc, null, regla);			
+		return null;
+	}
+	
 }

@@ -63,6 +63,14 @@ input[type="submit"]{
 	width: 15%
 }
 
+.ui-selectoneradio label, .ui-radiobutton .ui-widget{
+	margin-right: 5px;
+}
+
+.booking{
+	background-color: #ccc;
+}
+
 /******* HEADER ******/
 .header-app{
 	box-sizing: border-box;
