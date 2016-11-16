@@ -12,5 +12,13 @@
 			<to-view-id>/booking/resultadosVuelos.jsf</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>REGRESAR_RESULTADO_VUELO</from-outcome>
+			<to-view-id>/index.jsf</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

@@ -47,7 +47,7 @@ public class VueloItinerario extends EntityCore implements Serializable {
 
 	public VueloItinerario() {
 	}
-
+	
 	public BigDecimal getNIdvueloitinerario() {
 		return this.nIdvueloitinerario;
 	}

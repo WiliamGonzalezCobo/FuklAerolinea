@@ -93,10 +93,22 @@ public class BookingBean extends BackingUI {
 		itinerario.setDestino(aeropuerto);
 	}
 	
+	private boolean validar(){
+		boolean validador = true;
+		validador &= itinerario.getOrigen()  != null;
+		validador &= itinerario.getDestino() != null;
+		validador &= itinerario.getDFecha()  != null;
+		return validador;
+	}
+	
 	public void buscar(){
 		try {
-			navegar("RESULTADO_VUELO");
-			getBean(ResultadoVuelosBean.class).inicializar(itinerario);
+			if(validar()){
+				navegar("RESULTADO_VUELO");
+				getBean(ResultadoVuelosBean.class).inicializar(itinerario);
+			}else{
+				dialogWarn("Debe llenar mas campos.");
+			}
 		} catch (Exception e) {
 			dialogError(e);
 		}
@@ -104,6 +116,11 @@ public class BookingBean extends BackingUI {
 	
 	public void limpiar(){
 		try {
+			itinerario = new Itinerario();
+			itinerario.setCantidadAdultos(0);
+			itinerario.setCantidadNinos(0);
+			itinerario.setCantidadBebes(0);
+			cargarListas();
 		} catch (Exception e) {
 			dialogError(e);
 		}

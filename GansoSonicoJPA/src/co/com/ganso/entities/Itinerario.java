@@ -2,8 +2,23 @@ package co.com.ganso.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import co.com.ganso.services.bussinesslogic.AnotacionParametro;
 
 
 /**
@@ -12,7 +27,9 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="TB_ITINERARIO")
-@NamedQuery(name="Itinerario.findAll", query="SELECT i FROM Itinerario i ORDER BY i.nIditinerario DESC")
+@NamedQueries({
+	@NamedQuery(name="Itinerario.findAll", query="SELECT i FROM Itinerario i ORDER BY i.nIditinerario DESC"),
+	@NamedQuery(name="Itinerario.findItinerarios", query="SELECT i FROM Itinerario i WHERE i.tOrigen = :tOrigen AND i.tDestino = :tDestino and i.dFecha = :dFecha ORDER BY i.nIditinerario DESC")})
 public class Itinerario extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,8 +43,9 @@ public class Itinerario extends EntityCore implements Serializable {
 	@Column(name="T_ORIGEN")
 	private String tOrigen;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="D_FECHA")
-	private String dFecha;
+	private Date dFecha;
 	
 	@PrimaryKeyJoinColumn(name = "T_ORIGEN", referencedColumnName = "T_CODIGO")
     @ManyToOne(fetch = FetchType.EAGER)
@@ -38,7 +56,7 @@ public class Itinerario extends EntityCore implements Serializable {
     private Aeropuerto destino;
 	
 	@Transient
-	private String dFechaRegreso;
+	private Date dFechaRegreso;
 	
 	@Transient
 	private Integer cantidadAdultos;
@@ -57,6 +75,9 @@ public class Itinerario extends EntityCore implements Serializable {
 	
 	@Transient
 	private String flexible;
+	
+	@Transient
+    private List<VueloItinerario> vuelos;
 
 	public Itinerario() {
 	}
@@ -68,7 +89,8 @@ public class Itinerario extends EntityCore implements Serializable {
 	public void setNIditinerario(BigDecimal nIditinerario) {
 		this.nIditinerario = nIditinerario;
 	}
-
+	
+	@AnotacionParametro
 	public String getTDestino() {
 		return this.tDestino;
 	}
@@ -77,6 +99,7 @@ public class Itinerario extends EntityCore implements Serializable {
 		this.tDestino = tDestino;
 	}
 
+	@AnotacionParametro
 	public String getTOrigen() {
 		return this.tOrigen;
 	}
@@ -101,19 +124,20 @@ public class Itinerario extends EntityCore implements Serializable {
 		this.destino = destino;
 	}
 
-	public String getDFecha() {
+	@AnotacionParametro
+	public Date getDFecha() {
 		return dFecha;
 	}
 
-	public void setDFecha(String dFecha) {
+	public void setDFecha(Date dFecha) {
 		this.dFecha = dFecha;
 	}
 
-	public String getdFechaRegreso() {
+	public Date getdFechaRegreso() {
 		return dFechaRegreso;
 	}
 
-	public void setdFechaRegreso(String dFechaRegreso) {
+	public void setdFechaRegreso(Date dFechaRegreso) {
 		this.dFechaRegreso = dFechaRegreso;
 	}
 
@@ -163,6 +187,14 @@ public class Itinerario extends EntityCore implements Serializable {
 
 	public void setClaseDesc(String claseDesc) {
 		this.claseDesc = claseDesc;
+	}
+
+	public List<VueloItinerario> getVuelos() {
+		return vuelos;
+	}
+
+	public void setVuelos(List<VueloItinerario> vuelos) {
+		this.vuelos = vuelos;
 	}
 
 }

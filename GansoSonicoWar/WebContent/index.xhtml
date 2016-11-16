@@ -42,14 +42,14 @@
 							<p:outputLabel value="Fecha Ida: " for="fechaIda" styleClass="control-label"></p:outputLabel>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-								<p:calendar id="fechaIda" value="#{bookingBean.itinerario.DFecha}" navigator="true" pattern="dd/MM/yyyy HH:mm" locale="co" />
+								<p:calendar id="fechaIda" value="#{bookingBean.itinerario.DFecha}" navigator="true" pattern="dd/MM/yyyy" locale="co" />
 							</div>
 						</div>
 						<div class="form-group col-xs-6">
 							<p:outputLabel value="Fecha Regreso: " for="fechaRegreso" styleClass="control-label"></p:outputLabel>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-								<p:calendar id="fechaRegreso" value="#{bookingBean.itinerario.dFechaRegreso}" navigator="true" pattern="dd/MM/yyyy HH:mm" locale="co" />
+								<p:calendar id="fechaRegreso" value="#{bookingBean.itinerario.dFechaRegreso}" navigator="true" pattern="dd/MM/yyyy" locale="co" />
 							</div>
 						</div>
 					</div>
@@ -81,21 +81,14 @@
 							</h:selectOneMenu>
 						</div>
 					</div>
-					<div class="col-xs-12">
-						<div class="form-group col-xs-12">
-<!-- 							<h:selectManyCheckbox id="flexible" value="#{bookingBean.itinerario.flexible}"> -->
-<!-- 								<f:selectItem itemLabel="Hacer flexibles mis fechas de vuelo." itemValue="S" /> -->
-<!-- 							</h:selectManyCheckbox> -->
-						</div>
-					</div>
 					<br />
 					<div class="col-xs-12">
 						<br />
 						<div class="form-group col-xs-6">
-							<p:commandButton value="Buscar Vuelos" action="#{bookingBean.buscar}"  update="" styleClass="btn btn-primary"/>
+							<p:commandButton value="Buscar Vuelos" action="#{bookingBean.buscar}"  update=":form_workarea" styleClass="btn btn-primary"/>
 						</div>
 						<div class="form-group col-xs-6" style="text-align: right;">
-							<p:commandButton value="Limpiar Campos" action="#{bookingBean.limpiar}"  update="" styleClass="btn btn-default"/>
+							<p:commandButton value="Limpiar Campos" action="#{bookingBean.limpiar}"  update=":form_workarea" styleClass="btn btn-default"/>
 						</div>
 					</div>
 				</h:form>

@@ -7,6 +7,10 @@
 
 	<ui:define name="content">
 		<div class="row">
+			<h:panelGrid columns="1" style="margin-bottom:10px;">
+				<h:commandButton action="#{resultadoVuelosBean.regresar}" value="Regresar" />
+			</h:panelGrid>
+
 			<h1>Itinerario</h1>
 			
 			<h:panelGrid columns="3" width="100%">
@@ -30,7 +34,45 @@
 			<br /> <br />
 			<div class="row">
 				<h:form id="form_resultadoVuelos">
-				
+					<p:dataTable rowIndexVar="count" id="tabla_escala" var="itinerario" value="#{resultadoVuelosBean.itinerarios}" emptyMessage="No se encontraron registros." rows="15" paginator="true" paginatorPosition="bottom">
+
+						<p:column headerText="Origen:">
+							<h:outputText value="#{itinerario.origen.TNombre} (#{itinerario.origen.TCiudad})" />
+						</p:column>
+
+						<p:column headerText="Destino:">
+							<h:outputText value="#{itinerario.destino.TNombre} (#{itinerario.destino.TCiudad})" />
+						</p:column>
+
+						<p:column headerText="Salida:">
+							<h:outputText value="#{itinerario.DFecha}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="co" type="both" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="itinerario">
+							<p:dataTable id="escalas" var="escala" value="#{resultadoVuelosBean.itinerarios.get(count).vuelos}" emptyMessage="No se encontraron registros.">
+
+								<p:column headerText="Origen:">
+									<h:outputText value="#{escala.vuelo.origen.TNombre} (#{escala.vuelo.origen.TCiudad})" />
+								</p:column>
+
+								<p:column headerText="Destino:">
+									<h:outputText value="#{escala.vuelo.destino.TNombre} (#{escala.vuelo.destino.TCiudad})" />
+								</p:column>
+
+								<p:column headerText="Salida:">
+									<h:outputText value="#{escala.vuelo.DFechahorasalida}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="co" type="both" />
+									</h:outputText>
+								</p:column>
+							</p:dataTable>
+						</p:column>
+
+						<p:column>
+							<p:commandButton value="Comprar" action="#{resultadoVuelosBean.comprar}" update=":form_workarea" styleClass="btn btn-primary" />
+						</p:column>
+					</p:dataTable>
 				</h:form>
 			</div>
 		</div>
