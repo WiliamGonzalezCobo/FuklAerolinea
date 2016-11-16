@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Premio" visible="#{popupRedimirPremiosBean.visiblePopup}" rendered="#{popupRedimirPremiosBean.visiblePopup}" resizable="false" position="center" draggable="false"
+		closable="true" closeOnEscape="false" width="380px">
+		<p:ajax event="close" update=":popups" listener="#{popupRedimirPremiosBean.ocultarAjax}" />
+		<h:form id="form_popuppremio">
+			<h:panelGrid columns="3">
+				<p:outputLabel for="idpremio" value="ID:" /> 
+				<p:outputLabel id="idpremio" value="#{popupRedimirPremiosBean.premio.NIdpremio}" disabled="true" />
+				<p:message for="idpremio" />
+
+				<p:outputLabel for="nombre" value="Nombre:" />
+					<p:outputLabel id="nombre" value="#{popupRedimirPremiosBean.premio.TNombrepremio}" styleClass="x-large" />
+				<p:message for="nombre" />
+				
+				<p:outputLabel for="descripcion" value="Descripcion:" />
+					<p:outputLabel id="descripcion" value="#{popupRedimirPremiosBean.premio.TDescripcion}" styleClass="x-large" cols="50" rows="15"/>
+				<p:message for="descripcion" />
+
+				<p:outputLabel for="valorMillas" value="Valor Millas:" />
+					<p:outputLabel id="valorMillas" value="#{popupRedimirPremiosBean.premio.NValormillas}" minValue="0" decimalPlaces="0" />
+				<p:message for="valorMillas" />
+				
+				<!--  
+				<p:outputLabel for="estado" value="Estado:" />
+				<p:selectOneRadio id="estado" value="#{popupRedimirPremiosBean.premio.TActivo}">
+					<f:selectItem itemLabel="Activo" itemValue="S" />
+					<f:selectItem itemLabel="Inactivo" itemValue="N" />
+				</p:selectOneRadio>
+				<p:message for="estado" />
+				-->
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" style="width:150px; margin: 0 auto">
+				<p:commandButton value="Redimir Premio" action="#{popupRedimirPremiosBean.guardar}"  update=":form_premios" />
+				
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>

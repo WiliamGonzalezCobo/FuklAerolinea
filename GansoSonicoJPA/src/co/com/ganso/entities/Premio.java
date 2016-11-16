@@ -29,7 +29,7 @@ public class Premio extends EntityCore implements Serializable {
 	private BigDecimal nIdpremio;
 
 	@Column(name="N_VALORMILLAS")
-	private BigDecimal nValormillas;
+	private Integer nValormillas;
 
 	@Column(name="T_ACTIVO")
 	private String tActivo;
@@ -54,11 +54,11 @@ public class Premio extends EntityCore implements Serializable {
 		this.nIdpremio = nIdpremio;
 	}
 
-	public BigDecimal getNValormillas() {
+	public Integer getNValormillas() {
 		return this.nValormillas;
 	}
 
-	public void setNValormillas(BigDecimal nValormillas) {
+	public void setNValormillas(Integer nValormillas) {
 		this.nValormillas = nValormillas;
 	}
 

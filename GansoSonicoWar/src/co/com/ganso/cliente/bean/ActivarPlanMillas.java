@@ -54,7 +54,8 @@ public class ActivarPlanMillas extends BackingUI implements Serializable {
 				planMilla.setNMillasredimidas(0);
 				managerSvc.create(planMilla);
 				dialogInfo("Su Plan de Millas Fue Activado.");
-			}	
+			}
+			else{dialogInfo("Favor Inicie sesion.");}
 		} catch (Exception e) {
 			dialogInfo("Ya tiene Plan de millas Activo Felicitaciones");
 		}

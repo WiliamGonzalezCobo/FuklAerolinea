@@ -6,8 +6,11 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import co.com.ganso.services.bussinesslogic.AnotacionParametro;
 
 
 /**
@@ -16,7 +19,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="TB_PLANMILLAS")
-@NamedQuery(name="PlanMilla.findAll", query="SELECT p FROM PlanMilla p")
+@NamedQueries({
+@NamedQuery(name="PlanMilla.findIdPersona", query=PlanMilla.FIND_MILLAS_PERSONA),
+@NamedQuery(name="PlanMilla.findAll", query="SELECT p FROM PlanMilla p")})
 public class PlanMilla extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +64,8 @@ public class PlanMilla extends EntityCore implements Serializable {
 	public void setNMillasredimidas(Integer nMillasredimidas) {
 		this.nMillasredimidas = nMillasredimidas;
 	}
-
+	
+	@AnotacionParametro
 	public Integer getnIdPersona() {
 		return nIdPersona;
 	}
@@ -67,5 +73,7 @@ public class PlanMilla extends EntityCore implements Serializable {
 	public void setnIdPersona(Integer nIdPersona) {
 		this.nIdPersona = nIdPersona;
 	}
-
+	protected static final String FIND_MILLAS_PERSONA = "SELECT p "
+		    + "FROM PlanMilla p "
+		    + "WHERE p.nIdPersona = :nIdPersona";
 }

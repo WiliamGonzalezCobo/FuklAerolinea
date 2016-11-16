@@ -18,6 +18,7 @@ public class ManejadorURLUtils {
 		List<UrlUtils> urls = new ArrayList<UrlUtils>();
 		urls.add(new UrlUtils("/gansosonico/index.jsf", "Inicio"));
 		urls.add(new UrlUtils("/gansosonico/cliente/activarPlanMillas.jsf", "Activar Plan de Millas"));
+		urls.add(new UrlUtils("/gansosonico/cliente/redimirPremios.jsf", "Redimir Premios"));
 		return urls;
 	}
 	
