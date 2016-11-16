@@ -33,7 +33,7 @@ public class Usuario extends EntityCore implements Serializable {
 	private BigDecimal nIdusuario;
 
 	@Column(name="N_PERSONA")
-	private BigDecimal nPersona;
+	private Integer nPersona;
 
 	@Column(name="T_ACTIVO")
 	private String tActivo;
@@ -70,11 +70,11 @@ public class Usuario extends EntityCore implements Serializable {
 	}
 	
 	@AnotacionParametro
-	public BigDecimal getNPersona() {
+	public Integer getNPersona() {
 		return this.nPersona;
 	}
 
-	public void setNPersona(java.math.BigDecimal nPersona) {
+	public void setNPersona(Integer nPersona) {
 		this.nPersona = nPersona;
 	}
 

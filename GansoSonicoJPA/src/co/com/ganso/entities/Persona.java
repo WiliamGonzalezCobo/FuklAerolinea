@@ -25,7 +25,7 @@ public class Persona extends EntityCore implements Serializable {
 
 	@Id
 	@Column(name="N_IDPERSONA")
-	private BigDecimal nIdpersona;
+	private Integer nIdpersona;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="D_FECHANACIMIENTO")
@@ -52,11 +52,11 @@ public class Persona extends EntityCore implements Serializable {
 	public Persona() {
 	}
 
-	public BigDecimal getNIdpersona() {
+	public Integer getNIdpersona() {
 		return this.nIdpersona;
 	}
 
-	public void setNIdpersona(BigDecimal nIdpersona) {
+	public void setNIdpersona(Integer nIdpersona) {
 		this.nIdpersona = nIdpersona;
 	}
 

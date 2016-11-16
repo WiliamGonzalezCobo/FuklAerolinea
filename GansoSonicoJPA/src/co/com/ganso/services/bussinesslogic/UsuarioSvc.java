@@ -25,6 +25,7 @@ public class UsuarioSvc implements IUsuarioSvc {
 			credencial.setNombre(usuario.getPersona().getTNombres()+" "+usuario.getPersona().getTApellidos());
 			credencial.setAdministrador(usuario.getTAdministrador());
 			credencial.setCliente(usuario.getTCliente());
+			credencial.setIdentificacion(usuario.getNPersona());
 		};
 		
 		return credencial;
