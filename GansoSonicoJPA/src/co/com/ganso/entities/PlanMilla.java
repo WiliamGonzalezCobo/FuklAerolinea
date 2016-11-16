@@ -22,49 +22,49 @@ public class PlanMilla extends EntityCore implements Serializable {
 
 	@Id
 	@Column(name="N_IDPLANMILLA")
-	private BigDecimal nIdplanmilla;
+	private Integer nIdplanmilla;
 
 	@Column(name="N_MILLASACUMULADAS")
-	private BigDecimal nMillasacumuladas;
+	private Integer nMillasacumuladas;
 
 	@Column(name="N_MILLASREDIMIDAS")
-	private BigDecimal nMillasredimidas;
+	private Integer nMillasredimidas;
 	
 	@Column(name="N_IDPERSONA")
-	private BigDecimal nIdPersona;
+	private Integer nIdPersona;
 
 	public PlanMilla() {
 	}
 
-	public BigDecimal getNIdplanmilla() {
+	public Integer getNIdplanmilla() {
 		return this.nIdplanmilla;
 	}
 
-	public void setNIdplanmilla(BigDecimal nIdplanmilla) {
+	public void setNIdplanmilla(Integer nIdplanmilla) {
 		this.nIdplanmilla = nIdplanmilla;
 	}
 
-	public BigDecimal getNMillasacumuladas() {
+	public Integer getNMillasacumuladas() {
 		return this.nMillasacumuladas;
 	}
 
-	public void setNMillasacumuladas(BigDecimal nMillasacumuladas) {
+	public void setNMillasacumuladas(Integer nMillasacumuladas) {
 		this.nMillasacumuladas = nMillasacumuladas;
 	}
 
-	public BigDecimal getNMillasredimidas() {
+	public Integer getNMillasredimidas() {
 		return this.nMillasredimidas;
 	}
 
-	public void setNMillasredimidas(BigDecimal nMillasredimidas) {
+	public void setNMillasredimidas(Integer nMillasredimidas) {
 		this.nMillasredimidas = nMillasredimidas;
 	}
 
-	public BigDecimal getnIdPersona() {
+	public Integer getnIdPersona() {
 		return nIdPersona;
 	}
 
-	public void setnIdPersona(BigDecimal nIdPersona) {
+	public void setnIdPersona(Integer nIdPersona) {
 		this.nIdPersona = nIdPersona;
 	}
 

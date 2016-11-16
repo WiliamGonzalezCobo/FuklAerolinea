@@ -18,6 +18,8 @@ public class Credencial extends EntityCore implements Serializable {
 	private String nombre;
 	private String administrador;
 	private String cliente;
+	private Integer identificacion;
+	
 	public String getLogin() {
 		return login;
 	}
@@ -41,5 +43,11 @@ public class Credencial extends EntityCore implements Serializable {
 	}
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
+	}
+	public Integer getIdentificacion() {
+		return identificacion;
+	}
+	public void setIdentificacion(Integer identificacion) {
+		this.identificacion = identificacion;
 	}
 }
