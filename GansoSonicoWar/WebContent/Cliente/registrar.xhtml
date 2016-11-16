@@ -1,62 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml" 
+				xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-<h:head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<h:outputStylesheet library="default" name="css/bootstrap.min.css" />
-	<h:outputStylesheet library="default" name="css/bootstrapValidator.min.css" />
-	<h:outputStylesheet library="default" name="css/bootstrap-theme.css" />
-	<h:outputStylesheet library="default" name="css/main.css" />
-	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
-	<h:outputScript library="default" name="js/bootstrap.min.js" />
-	<h:outputScript library="default" name="js/bootstrapValidator.min.js" />
-	<h:outputScript library="default" name="js/validator.js" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-	
-	
-</h:head>
-<h:body>
+	<ui:define name="content">
 
-
-	<div class="container-fluid ">
-		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="../index.html"> <h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" />
-				</a>
-			</div>
-			<h2 class="navbar-text">Aerolinea el ganso sónico</h2>
-
-			<h:form class="navbar-form navbar-right">
-				<div class="form-group">
-					<div class="col-xs-9">
-						<h:outputText value="" />
-						<h:inputText value="#{login.username}" class="form-control" id="inputEmail" pt:placeholder="Usuario"></h:inputText>
-					</div>
-				</div>
-				<div class="form-group">
-
-					<div class="col-xs-9">
-
-						<h:inputSecret value="#{login.password}" class="form-control" id="inputPassword" pt:placeholder="Password"></h:inputSecret>
-					</div>
-
-				</div>
-				<div class="form-group">
-					<div class="col-xs-offset-3 col-xs-9">
-
-						<p:commandButton action="#{login.accede()}" value="Login" class="btn btn-primary" />
-					</div>
-				</div>
-			</h:form>
-		</div>
-		</nav>
-	</div>
 	<div class="container container-table">
 		<div class="col-lg-6">
 			<div class="container">
@@ -84,7 +35,8 @@
 					<div class="form-group">
 						<div class="col-lg-3">
 							<h:outputText class="control-label" value="Fecha de Nacimiento" />
-							<p:calendar value="#{clienteBean.persona.DFechanacimiento}" class="form-control" id="fecha" navigator="true" pattern="dd/MM/yyyy HH:mm" locale="co" />
+							<br />
+							<p:calendar value="#{clienteBean.persona.DFechanacimiento}" id="fecha" navigator="true" pattern="dd/MM/yyyy HH:mm" locale="co" />
 						</div>
 
 						<div class="col-lg-3">
@@ -135,5 +87,5 @@
 			</div>
 		</div>
 	</div>
-</h:body>
-</html>
+</ui:define>
+</ui:composition>
