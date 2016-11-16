@@ -17,6 +17,7 @@ import co.com.ganso.services.bussiness.IManagerSvc;
 import co.com.ganso.services.bussinesslogic.exceptions.IllegalOrphanException;
 import co.com.ganso.services.bussinesslogic.exceptions.NonexistentEntityException;
 import co.com.ganso.services.bussinesslogic.exceptions.PreexistingEntityException;
+import java.sql.*; 
 
 @Stateless
 public class ManagerSvc implements IManagerSvc {
@@ -25,7 +26,7 @@ public class ManagerSvc implements IManagerSvc {
 	private EntityManager em;
 
 	@Override
-	public void create(EntityCore entityCore) throws PreexistingEntityException, Exception {
+	public void create(EntityCore entityCore) throws SQLException, PreexistingEntityException, Exception {
 		em.persist(entityCore);
 	}
 

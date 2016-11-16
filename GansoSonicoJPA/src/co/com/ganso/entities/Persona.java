@@ -32,10 +32,7 @@ public class Persona extends EntityCore implements Serializable {
 	private Date dFechanacimiento;
 
 	@Column(name="N_CATEGORIA")
-	private java.math.BigDecimal nCategoria;
-
-	@Column(name="N_PLANMILLA")
-	private java.math.BigDecimal nPlanmilla;
+	private Integer nCategoria;
 
 	@Column(name="T_APELLIDOS")
 	private String tApellidos;
@@ -71,20 +68,12 @@ public class Persona extends EntityCore implements Serializable {
 		this.dFechanacimiento = dFechanacimiento;
 	}
 
-	public java.math.BigDecimal getNCategoria() {
+	public Integer getNCategoria() {
 		return this.nCategoria;
 	}
 
-	public void setNCategoria(java.math.BigDecimal nCategoria) {
+	public void setNCategoria(Integer nCategoria) {
 		this.nCategoria = nCategoria;
-	}
-
-	public java.math.BigDecimal getNPlanmilla() {
-		return this.nPlanmilla;
-	}
-
-	public void setNPlanmilla(java.math.BigDecimal nPlanmilla) {
-		this.nPlanmilla = nPlanmilla;
 	}
 
 	public String getTApellidos() {

@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<h:outputStylesheet library="default" name="css/bootstrap.min.css" />
+	<h:outputStylesheet library="default" name="css/bootstrapValidator.min.css" />
+	<h:outputStylesheet library="default" name="css/bootstrap-theme.css" />
+	<h:outputStylesheet library="default" name="css/main.css" />
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+	<h:outputScript library="default" name="js/bootstrap.min.js" />
+	<h:outputScript library="default" name="js/bootstrapValidator.min.js" />
+	<h:outputScript library="default" name="js/validator.js" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+	
+	
+</h:head>
+<h:body>
+
+
+	<div class="container-fluid ">
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="../index.html"> <h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" />
+				</a>
+			</div>
+			<h2 class="navbar-text">Aerolinea el ganso sónico</h2>
+
+			<h:form class="navbar-form navbar-right">
+				<div class="form-group">
+					<div class="col-xs-9">
+						<h:outputText value="" />
+						<h:inputText value="#{login.username}" class="form-control" id="inputEmail" pt:placeholder="Usuario"></h:inputText>
+					</div>
+				</div>
+				<div class="form-group">
+
+					<div class="col-xs-9">
+
+						<h:inputSecret value="#{login.password}" class="form-control" id="inputPassword" pt:placeholder="Password"></h:inputSecret>
+					</div>
+
+				</div>
+				<div class="form-group">
+					<div class="col-xs-offset-3 col-xs-9">
+
+						<p:commandButton action="#{login.accede()}" value="Login" class="btn btn-primary" />
+					</div>
+				</div>
+			</h:form>
+		</div>
+		</nav>
+	</div>
+	<div class="container container-table">
+		<div class="col-lg-6">
+			<div class="container">
+				<h:form class="form-horizontal" id="registrationForm">
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Identificacion" />
+							<h:inputText value="#{clienteBean.persona.NIdpersona}" class="form-control" id="Identificacion" pt:placeholder="Identificacion"></h:inputText>
+						</div>
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Pasaporte" />
+							<h:inputText value="#{clienteBean.persona.TPasaporte}" class="form-control" id="inputPasaporte" pt:placeholder="Pasaporte"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Nombres" />
+							<h:inputText value="#{clienteBean.persona.TNombres}" class="form-control" id="nombre" pt:placeholder="Nombres"></h:inputText>
+						</div>
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Apellidos" />
+							<h:inputText value="#{clienteBean.persona.TApellidos}" class="form-control" id="apellido" pt:placeholder="Apellidos"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Fecha de Nacimiento" />
+							<p:calendar value="#{clienteBean.persona.DFechanacimiento}" class="form-control" id="fecha" navigator="true" pattern="dd/MM/yyyy HH:mm" locale="co" />
+						</div>
+
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Direccion" />
+							<h:inputText value="#{clienteBean.persona.TDireccion}" class="form-control" id="inputDireccion" pt:placeholder="Direccion"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Telefono" />
+							<h:inputText value="#{clienteBean.persona.TTelefono}" class="form-control" id="telefono" pt:placeholder="Telefono"></h:inputText>
+						</div>
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Login" />
+							<h:inputText value="#{clienteBean.usuario.TLogin}" class="form-control" id="inputUsername" pt:placeholder="Usuario"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Contraseña" />
+							<h:inputSecret value="#{clienteBean.usuario.TPass}" class="form-control" id="inputPassword" pt:placeholder="Contraseña"></h:inputSecret>
+						</div>
+
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Confirmar Contraseña" />
+							<h:inputSecret value="#{clienteBean.confPass}" class="form-control" id="inputConfPassword" pt:placeholder="Confirmar Contraseña"></h:inputSecret>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Correo Electronico" />
+							<h:inputText value="#{clienteBean.usuario.TCorreo}" class="form-control" id="correo" pt:placeholder="Correo"></h:inputText>
+							
+						</div>
+						<div class="col-lg-6">
+									<h:outputText class="checkbox-inline"/>
+										<input type="checkbox" value="agree"></input> Acepto <a href="#">Políticas de uso y servicios</a>
+								</div>
+					</div>
+					
+						<div class="form-group">
+							<div class="col-lg-3">
+								<p:commandButton action="#{clienteBean.crearPersona}" value="Registrar" id="btnRegistrar" class="btn btn-primary" />
+							</div>
+						</div>
+					
+				</h:form>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

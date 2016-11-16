@@ -19,7 +19,15 @@
 	<h:outputScript library="default" name="js/bootstrap.min.js" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+<script type="text/javascript">
+function setHdAdmin(new_value){
 
+	document.getElementById('myForm:hdAdministrador').value = new_value;
+
+   }
+
+
+</script>
 </h:head>
 <h:body>
 
@@ -34,7 +42,14 @@
 			</div>
 			<h2 class="navbar-text">Aerolinea el ganso sónico</h2>
 
-			<h:form class="navbar-form navbar-right">
+					</div>
+		</nav>
+	</div>
+	<div class="container container-table">
+		<div class="row vertical-center-row">
+			<div class="text-center col-md-4 col-md-offset-4">
+			<h:form class="form-horizontal" id="myForm">
+			<h:inputHidden value="#{login.administrador}" id="hdAdministrador" />
 				<div class="form-group">
 					<div class="col-xs-9">
 						<h:outputText value="" />
@@ -55,78 +70,15 @@
 					<div class="col-xs-offset-3 col-xs-9">
 
 						<p:commandButton action="#{login.accede()}" value="Login"
-							class="btn btn-primary" />
+							class="btn btn-primary" onclick="setHdAdmin('S');"/>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-xs-offset-3 col-xs-9">
-				
-				<a href="http://localhost:8180/gansosonico/Cliente/registrar.htmlx">Registro</a>
-				</div>
-				</div>
 			</h:form>
-		</div>
-		</nav>
-	</div>
-	<div class="container container-table">
-		<div class="row vertical-center-row">
-			<div class="text-center col-md-4 col-md-offset-4"></div>
-		</div>
-	</div>
-
-	<div class="container">
-		<ui:insert name="content">
-
-		</ui:insert>
-	</div>
-
-	<div class="container-fluid">
-		<footer class="footer-distributed">
-		<div class="footer-left">
-			<h3>
-				Ganso Sonico<span><h:graphicImage library="default"
-						name="img/logo.jpg"
-						style="width: 35px; height: 35px; border-radius: 30px;" /></span>
-			</h3>
-			<p class="footer-company-name">Aerolinea © 2016</p>
-		</div>
-		<div class="footer-center">
-			<div>
-				<i class="fa fa-map-marker"></i>
-				<p>
-					<span>Calle Falsa 123</span> Bogotá, Colombia
-				</p>
-			</div>
-			<div>
-				<i class="fa fa-phone"></i>
-				<p>+1 555 123456</p>
-			</div>
-
-			<div>
-				<i class="fa fa-envelope"></i>
-				<p>
-					<a href="mailto:support@gansosonico.com">support@gansosonico.com</a>
-				</p>
+			
 			</div>
 		</div>
-
-		<div class="footer-right">
-			<p class="footer-company-about">
-				<span>About the company</span> Lorem ipsum dolor sit amet,
-				consectateur adispicing elit. Fusce euismod convallis velit, eu
-				auctor lacus vehicula sit amet.
-			</p>
-			<div class="footer-icons">
-				<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-					class="fa fa-twitter"></i></a> <a href="#"><i
-					class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-github"></i></a>
-			</div>
-		</div>
-		</footer>
+		
+		
 	</div>
-
-	<ui:insert name="popups">
-
-	</ui:insert>
 </h:body>
 </html>

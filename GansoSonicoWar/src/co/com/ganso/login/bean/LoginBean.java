@@ -24,6 +24,7 @@ public class LoginBean extends BackingUI implements Serializable {
 	private Usuario usuario;
 	private String password;
 	private String username;
+	private String administrador;
 	
 	@PostConstruct
 	public void init(){
@@ -32,18 +33,24 @@ public class LoginBean extends BackingUI implements Serializable {
 
 	public String accede() {
 		try {
-			usuario.setTLogin(username);
-			usuario.setTPass(password);
-			usuario.setTAdministrador("S");
-
+			usuario.setTLogin(getUsername());
+			usuario.setTPass(getPassword());
+			//usuario.setTAdministrador("S");
+			usuario.setTAdministrador(getAdministrador());
+			
 			if (usuarioSvc.acceder(usuario)) {
 				dialogInfo("Acceso Correcto");
 				return "admin/premios/premios.xhtml";
 
 			} else {
+				if(getAdministrador().equals("S")){
 				dialogWarn("Credenciales Incorrectas.");
-				return "index.xhtml";
-			}
+				return "indexAdm.xhtml";
+				}else{
+					dialogWarn("Credenciales Incorrectas.");
+					return "index.xhtml";
+				}
+				}
 		} catch (Exception e) {
 			dialogError(e);
 			return "";
@@ -64,6 +71,14 @@ public class LoginBean extends BackingUI implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(String administrador) {
+		this.administrador = administrador;
 	}
 
 }

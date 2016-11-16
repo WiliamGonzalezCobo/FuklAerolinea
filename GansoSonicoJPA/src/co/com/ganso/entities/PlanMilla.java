@@ -29,6 +29,9 @@ public class PlanMilla extends EntityCore implements Serializable {
 
 	@Column(name="N_MILLASREDIMIDAS")
 	private BigDecimal nMillasredimidas;
+	
+	@Column(name="N_IDPERSONA")
+	private BigDecimal nIdPersona;
 
 	public PlanMilla() {
 	}
@@ -55,6 +58,14 @@ public class PlanMilla extends EntityCore implements Serializable {
 
 	public void setNMillasredimidas(BigDecimal nMillasredimidas) {
 		this.nMillasredimidas = nMillasredimidas;
+	}
+
+	public BigDecimal getnIdPersona() {
+		return nIdPersona;
+	}
+
+	public void setnIdPersona(BigDecimal nIdPersona) {
+		this.nIdPersona = nIdPersona;
 	}
 
 }
