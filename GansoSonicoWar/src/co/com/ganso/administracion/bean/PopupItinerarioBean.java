@@ -1,5 +1,6 @@
 package co.com.ganso.administracion.bean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -28,7 +29,8 @@ public class PopupItinerarioBean extends BackingPopupUI {
 	
 	private VueloItinerario escala;
 	private List<VueloItinerario> escalas;
-
+	private boolean nuevo;
+	
 	@PostConstruct
 	public void init() {
 		try {
@@ -42,10 +44,25 @@ public class PopupItinerarioBean extends BackingPopupUI {
 		try {
 			setDestino(destino);
 			this.itinerario = itinerario;
+			if(itinerario.getNIditinerario()==null){
+				nuevo = true;
+			}else{
+				cargarEscalas();
+			}
 			mostrarPopup();
 		} catch (Exception e) {
 			dialogError(e);
 		}
+	}
+	
+	private void cargarEscalas() throws Exception{
+		VueloItinerario buscarEscalas = new VueloItinerario();
+		buscarEscalas.setNItinerario(itinerario.getNIditinerario());
+		escalas = managerSvc.findList(buscarEscalas, "VueloItinerario.findEscalas");
+	}
+	
+	private Integer calcularOrden(){
+		return escalas.size()+1;
 	}
 	
 	public void verOrigen(){
@@ -80,15 +97,31 @@ public class PopupItinerarioBean extends BackingPopupUI {
 	
 	public void verVuelos(){
 		try {
-			getBean(PopupListaVueloBean.class).inicializar("popupItinerarioBean.vueloEscala", itinerario.getTOrigen());
+			getBean(PopupListaVueloBean.class).inicializar("popupItinerarioBean.vueloEscala", origenEscala());
 		} catch (Exception e) {
 			dialogError(e);
 		}
 	}
 	
+	private String origenEscala(){
+		if(escalas.size()==0){
+			return itinerario.getTOrigen();
+		}
+		return escalas.get(escalas.size()-1).getVuelo().getTDestino();
+	}
+	
+	private boolean destinoEscala(){
+		if(escalas==null||escalas.size()==0){
+			return true;
+		}
+		return escalas.get(escalas.size()-1).getVuelo().getTDestino().equals(itinerario.getOrigen().getTCodigo());
+	}
+	
 	public void setVueloEscala(Vuelo vuelo) throws Exception{
-		escala.setNVuelo(vuelo.getNIdvuelo());
+		escala.setNItinerario(itinerario.getNIditinerario());
 		escala.setVuelo(vuelo);
+		escala.setNVuelo(vuelo.getNIdvuelo());
+		escala.setNOrden(new BigDecimal(calcularOrden()));
 	}
 	
 	private boolean validar(){
@@ -108,6 +141,7 @@ public class PopupItinerarioBean extends BackingPopupUI {
 					dialogInfo("Se ha actualizado el registro.");
 				}
 				aplicarDestino(null);
+				ocultarPopup();
 			}
 		} catch (Exception e) {
 			dialogError(e);
@@ -116,29 +150,33 @@ public class PopupItinerarioBean extends BackingPopupUI {
 
 	public void eliminar() {
 		try {
-			managerSvc.delete(itinerario.getNIditinerario());
+			managerSvc.delete(itinerario);
 			dialogInfo("Se ha eliminado el registro.");
+			ocultarPopup();
 		} catch (Exception e) {
 			dialogError(e);
 		}
+	}
+	
+	private boolean validarEscala(){
+		boolean validador = true;
+		
+		return validador;
 	}
 	
 	public void adicionarEscala(){
 		try {
-			
+			if(validarEscala()){
+				managerSvc.create(escala);
+				dialogInfo("Se inserto la escala");
+				cargarEscalas();
+				destinoEscala();
+			}
 		} catch (Exception e) {
 			dialogError(e);
 		}
 	}
 	
-	public void eliminarEscala(){
-		try {
-			
-		} catch (Exception e) {
-			dialogError(e);
-		}
-	}
-
 	public Itinerario getItinerario() {
 		return itinerario;
 	}
@@ -161,5 +199,17 @@ public class PopupItinerarioBean extends BackingPopupUI {
 
 	public void setEscalas(List<VueloItinerario> escalas) {
 		this.escalas = escalas;
+	}
+
+	public boolean isNuevo() {
+		return nuevo;
+	}
+
+	public void setNuevo(boolean nuevo) {
+		this.nuevo = nuevo;
+	}
+	
+	public boolean isItinerarioCompleto(){
+		return destinoEscala();
 	}
 }

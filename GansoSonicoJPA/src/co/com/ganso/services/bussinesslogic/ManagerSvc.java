@@ -1,7 +1,7 @@
 package co.com.ganso.services.bussinesslogic;
 
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +14,6 @@ import javax.persistence.Query;
 
 import co.com.ganso.entities.EntityCore;
 import co.com.ganso.services.bussiness.IManagerSvc;
-import co.com.ganso.services.bussinesslogic.exceptions.IllegalOrphanException;
-import co.com.ganso.services.bussinesslogic.exceptions.NonexistentEntityException;
-import co.com.ganso.services.bussinesslogic.exceptions.PreexistingEntityException;
-import java.sql.*; 
 
 @Stateless
 public class ManagerSvc implements IManagerSvc {
@@ -26,46 +22,21 @@ public class ManagerSvc implements IManagerSvc {
 	private EntityManager em;
 
 	@Override
-	public void create(EntityCore entityCore) throws SQLException, PreexistingEntityException, Exception {
+	public void create(EntityCore entityCore) throws Exception {
 		em.persist(entityCore);
 	}
 
 	@Override
-	public void update(EntityCore entityCore) throws IllegalOrphanException, NonexistentEntityException, Exception {
+	public void update(EntityCore entityCore) throws Exception {
 		em.merge(entityCore);
 	}
 
 	@Override
-	public void delete(BigDecimal id) throws IllegalOrphanException, NonexistentEntityException {
-		em.getReference(EntityCore.class, id);
+	public void delete(EntityCore entityCore) throws Exception {
+		update(entityCore);
+		em.remove(entityCore);
 	}
 
-//	@Override
-//	public <T> List<T> findAll(Class<T> clase) {
-//		return findRegister(true, -1, -1, clase);
-//	}
-
-//	@Override
-//	public <T> List<T> findLimit(int maxResults, int firstResult, Class<T> clase) {
-//		return findRegister(false, maxResults, firstResult, clase);
-//	}
-
-//	private <T> List<T> findRegister(boolean all, int maxResults, int firstResult, Class<T> clase) {
-//		CriteriaBuilder cb = em.getCriteriaBuilder();
-//		CriteriaQuery<T> cq = cb.createQuery(clase);
-//		Root<T> rootEntry = cq.from(clase);
-//		CriteriaQuery<T> todos = cq.select(rootEntry);
-//		TypedQuery<T> allQuery = em.createQuery(todos)
-//								   .setFirstResult(firstResult)
-//								   .setMaxResults(maxResults);
-//		return allQuery.getResultList();
-//	}
-
-//	@Override
-//	public <T> T findById(Class<T> clase, Object id) throws Exception{
-//		return em.find(clase, id);
-//	}
-	
 	@SuppressWarnings("unchecked")
 	public <T extends EntityCore> List<T> findList(EntityCore entity, String nameQuery) throws Exception{
 		Map<String, Object> mapaParametros = buildMapParameters(entity);
@@ -75,6 +46,9 @@ public class ManagerSvc implements IManagerSvc {
 		}
 		
 		List<T> list = query.getResultList();
+		if(list==null || list.size()==0){
+			list = new ArrayList<T>();
+		}
 		
 		return list;
 	}

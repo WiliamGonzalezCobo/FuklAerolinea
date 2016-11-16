@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="TB_ITINERARIO")
-@NamedQuery(name="Itinerario.findAll", query="SELECT i FROM Itinerario i")
+@NamedQuery(name="Itinerario.findAll", query="SELECT i FROM Itinerario i ORDER BY i.nIditinerario DESC")
 public class Itinerario extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 

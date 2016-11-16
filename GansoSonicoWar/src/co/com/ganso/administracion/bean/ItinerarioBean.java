@@ -10,7 +10,6 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.SelectEvent;
 
 import co.com.ganso.entities.Itinerario;
-import co.com.ganso.entities.VueloItinerario;
 import co.com.ganso.nucleo.bean.BackingUI;
 import co.com.ganso.services.bussiness.IManagerSvc;
 

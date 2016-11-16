@@ -8,9 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import co.com.ganso.services.bussinesslogic.AnotacionParametro;
 
 
 /**
@@ -19,7 +22,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="TB_VUELOITINERARIO")
-@NamedQuery(name="VueloItinerario.findAll", query="SELECT t FROM VueloItinerario t")
+@NamedQueries({
+@NamedQuery(name="VueloItinerario.findAll", query="SELECT t FROM VueloItinerario t"),
+@NamedQuery(name="VueloItinerario.findEscalas", query="SELECT t FROM VueloItinerario t WHERE t.nItinerario = :nItinerario ORDER BY t.nOrden")})
 public class VueloItinerario extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -50,7 +55,8 @@ public class VueloItinerario extends EntityCore implements Serializable {
 	public void setNIdvueloitinerario(BigDecimal nIdvueloitinerario) {
 		this.nIdvueloitinerario = nIdvueloitinerario;
 	}
-
+	
+	@AnotacionParametro
 	public BigDecimal getNItinerario() {
 		return this.nItinerario;
 	}

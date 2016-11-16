@@ -5,9 +5,12 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import co.com.ganso.services.bussinesslogic.AnotacionParametro;
@@ -49,6 +52,10 @@ public class Usuario extends EntityCore implements Serializable {
 	
 	@Column(name="T_CLIENTE")
 	private String tCliente;
+	
+	@PrimaryKeyJoinColumn(name = "N_PERSONA", referencedColumnName = "N_IDPERSONA")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Persona persona;
 
 	public Usuario() {
 	}
@@ -107,7 +114,6 @@ public class Usuario extends EntityCore implements Serializable {
 		this.tPass = tPass;
 	}
 
-	@AnotacionParametro
 	public String getTAdministrador() {
 		return tAdministrador;
 	}
@@ -131,6 +137,14 @@ public class Usuario extends EntityCore implements Serializable {
 												    + "FROM Usuario u "
 												    + "WHERE u.tLogin = :tLogin "
 												  		   + "and u.tPass = :tPass "
-												  		   + "and u.tAdministrador = :tAdministrador"; 
+												  		   + "and u.tActivo = :tActivo";
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	} 
 
 }

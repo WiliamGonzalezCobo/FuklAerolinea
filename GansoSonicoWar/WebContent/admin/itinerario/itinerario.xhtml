@@ -20,12 +20,6 @@
 						selection="#{itinerarioBean.itinerarioSeleccionado}" rowKey="#{itinerario.NIditinerario}">
 						<p:ajax event="rowSelect" listener="#{itinerarioBean.verItinerario}" update=":popups"/>
 
-						<p:column headerText="Origen:" filterBy="#{itinerario.NIditinerario}" filterMatchMode="contains">
-							<h:panelGrid columns="1" styleClass="tabla-no-borde">
-								<h:outputText value="#{itinerario.NIditinerario}" />
-							</h:panelGrid>
-						</p:column>
-
 						<p:column headerText="Origen:" filterBy="#{itinerario.origen.TNombre} #{itinerario.origen.TCiudad}" filterMatchMode="contains">
 							<h:panelGrid columns="1" styleClass="tabla-no-borde">
 								<h:outputText value="#{itinerario.origen.TNombre}" />
@@ -33,7 +27,7 @@
 							</h:panelGrid>
 						</p:column>
 
-						<p:column headerText="Origen:" filterBy="#{itinerario.destino.TNombre} #{itinerario.destino.TCiudad}" filterMatchMode="contains">
+						<p:column headerText="Destino:" filterBy="#{itinerario.destino.TNombre} #{itinerario.destino.TCiudad}" filterMatchMode="contains">
 							<h:panelGrid columns="1" styleClass="tabla-no-borde">
 								<h:outputText value="#{itinerario.destino.TNombre}" />
 								<h:outputText value="(#{itinerario.destino.TCiudad})" styleClass="negrilla" />

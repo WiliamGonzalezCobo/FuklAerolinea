@@ -1,9 +1,13 @@
 package co.com.ganso.nucleo.bean;
 
 import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
 import org.primefaces.context.RequestContext;
+
+import co.com.ganso.entities.Credencial;
 
 public abstract class BackingUI implements Serializable {
 
@@ -47,6 +51,21 @@ public abstract class BackingUI implements Serializable {
 		String nombreBean = clase.getSimpleName();
 		nombreBean = nombreBean.substring(0, 1).toLowerCase() + nombreBean.substring(1);
 		return (T) FacesUtils.getBean(nombreBean);
+	}
+	
+	public boolean isTieneCredencial(){
+		if(getCredencial()==null){
+			return false;
+		}
+		return true;
+	}
+	
+	public Credencial getCredencial(){
+		return (Credencial) SessionUtils.getParameterSession("credencial");
+	}
+	
+	public void destroySession(){
+		
 	}
 	
 }
