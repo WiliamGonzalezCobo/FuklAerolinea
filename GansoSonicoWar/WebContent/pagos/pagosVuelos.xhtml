@@ -57,7 +57,7 @@
 								<div class="col-xs-4">
 									<h:selectOneMenu value="#{pagoBean.franquicia}" id="cboFranquicia"
 										styleClass="form-control">
-
+										<f:selectItems value="#{pagoBean.listaFranquiciaFinal}"/>
 									</h:selectOneMenu>
 								</div>
 								<label class="control-label col-xs-2">Número tarjeta:</label>
@@ -105,9 +105,9 @@
 							<div class="form-group">
 								<label class="control-label col-xs-1">País:</label>
 								<div class="col-xs-4">
-									<h:selectOneMenu value="#{pagoBean.franquicia}"
+									<h:selectOneMenu value="#{pagoBean.pais}"
 										styleClass="form-control">
-
+										<f:selectItems value="#{pagoBean.listaPaisFinal}"/>
 									</h:selectOneMenu>
 								</div>
 								<label class="control-label col-xs-2">Código postal:</label>
@@ -121,7 +121,7 @@
 					<br />
 					<div class="form-group">
 						<div class="col-xs-offset-2 col-xs-4">
-							<p:commandButton action="#{pagoBean.guardarPago()}"
+							<p:commandButton action="#{pagoBean.guardarPago()}" onclick="javascript:payValidate();"
 								value="Realizar pago" class="btn btn-primary" />
 						</div>
 						<div class="col-xs-offset-2 col-xs-4">

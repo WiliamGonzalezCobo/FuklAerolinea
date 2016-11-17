@@ -32,8 +32,6 @@ function validarNumero(numeroT, franquiciaValue) {
 	if (!re.test(numeroT)) {
 		return false;
 	} else {
-		
-		
 		return validacionLongitudTarjetaCredito(numeroT);
 	}
 }
@@ -43,7 +41,7 @@ function validacionLongitudTarjetaCredito(value) {
 	for (var i = (2 - (value.length % 2)); i <= value.length; i += 2) {
 		checksum += parseInt(value.charAt(i - 1));
 	}
-	
+
 	for (var i = (value.length % 2) + 1; i < value.length; i += 2) {
 		var digit = parseInt(value.charAt(i - 1)) * 2;
 		if (digit < 10) {
@@ -52,16 +50,35 @@ function validacionLongitudTarjetaCredito(value) {
 			checksum += (digit - 9);
 		}
 	}
-	
+
 	if ((checksum % 10) == 0) {
 		return true;
 	} else {
 		return false;
 	}
-	
+
 	return;
 }
 
-private payValidate(){
-	
+function payValidate() {	
+	var fran = $("#cboFranquicia").val();
+	var num = $("#txtNumTarjeta").val();
+	var exp = $("#cboMes").val() + "/" + $("#cboAno").val();
+	var cod = $("#txtCVV").val();
+
+	if (validarNumero(num, fran)) {
+		$.ajax({
+			url : "http://localhost:3000/pay/",
+			data : JSON.stringify(clientTest),
+			type : "POST",
+			contentType : 'text/plain',
+			dataType : "json",
+			success : function(data, textStatus, xhr) {
+				return true;
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				return false;
+			}
+		});
+	}
 }

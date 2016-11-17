@@ -32,8 +32,9 @@ public class PagoBean extends BackingUI {
 	private String pais;
 	private String codigoPostal;
 	private List<SelectItem> listaMesFinal;
-	private List<SelectItem> listaAnofinal;
+	private List<SelectItem> listaAnoFinal;
 	private List<SelectItem> listaPaisFinal;
+	private List<SelectItem> listaFranquiciaFinal;
 
 	private List<Pais> listadoPaises;
 	private List<String> listadoMes;
@@ -47,12 +48,14 @@ public class PagoBean extends BackingUI {
 			this.listadoAno = new ArrayList<String>();
 
 			this.listaMesFinal = new ArrayList<SelectItem>();
-			this.listaAnofinal = new ArrayList<SelectItem>();
+			this.listaAnoFinal = new ArrayList<SelectItem>();
 			this.listaPaisFinal = new ArrayList<SelectItem>();
+			this.listaFranquiciaFinal = new ArrayList<SelectItem>();
 
 			cargarPaises();
 			cargarMeses();
 			cargarAnos();
+			cargarFranquicias();
 		} catch (Exception e) {
 			dialogError(e);
 		}
@@ -67,7 +70,7 @@ public class PagoBean extends BackingUI {
 	}
 
 	private void cargarPaises() throws Exception {
-		listadoPaises = managerSvc.findAll(Pais.class);
+		listadoPaises = managerSvc.findList(new Pais(), "Pais.findAll");
 
 		for (Pais paisVal : listadoPaises) {
 			listaPaisFinal.add(new SelectItem(paisVal.getTCodigo(), paisVal.getTNombre()));
@@ -76,10 +79,10 @@ public class PagoBean extends BackingUI {
 
 	private void cargarMeses() throws Exception {
 		for (int i = 1; i < 13; i++) {
-			if (i < 9) {
+			if (i <= 9) {
 				listadoMes.add("0" + i);
 			} else {
-				listadoMes.add("1" + i);
+				listadoMes.add(String.valueOf(i));
 			}
 		}
 
@@ -95,9 +98,16 @@ public class PagoBean extends BackingUI {
 			listadoAno.add(String.valueOf(value));
 		}
 
-		for (String val : listadoMes) {
-			listaMesFinal.add(new SelectItem(val, val));
+		for (String val : listadoAno) {
+			listaAnoFinal.add(new SelectItem(val, val));
 		}
+	}
+
+	private void cargarFranquicias() {
+		listaFranquiciaFinal.add(new SelectItem("1", "Visa"));
+		listaFranquiciaFinal.add(new SelectItem("2", "Master Card"));
+		listaFranquiciaFinal.add(new SelectItem("3", "Diners"));
+		listaFranquiciaFinal.add(new SelectItem("4", "American Express"));
 	}
 
 	public String guardarPago() {
@@ -121,7 +131,7 @@ public class PagoBean extends BackingUI {
 	}
 
 	public String regresarInicio() {
-		return "localhost:8081/gansosonico/index.jsf";
+		return "../index.xhtml";
 	}
 
 	public String getNombre() {
@@ -193,10 +203,14 @@ public class PagoBean extends BackingUI {
 	}
 
 	public List<SelectItem> getListaAnofinal() {
-		return listaAnofinal;
+		return listaAnoFinal;
 	}
 
 	public List<SelectItem> getListaPaisFinal() {
 		return listaPaisFinal;
+	}
+
+	public List<SelectItem> getListaFranquiciaFinal() {
+		return listaFranquiciaFinal;
 	}
 }
