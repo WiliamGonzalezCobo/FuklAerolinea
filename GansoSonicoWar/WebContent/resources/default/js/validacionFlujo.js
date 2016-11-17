@@ -32,6 +32,8 @@ function validarNumero(numeroT, franquiciaValue) {
 	if (!re.test(numeroT)) {
 		return false;
 	} else {
+		
+		
 		return validacionLongitudTarjetaCredito(numeroT);
 	}
 }
@@ -58,4 +60,8 @@ function validacionLongitudTarjetaCredito(value) {
 	}
 	
 	return;
+}
+
+private payValidate(){
+	
 }
