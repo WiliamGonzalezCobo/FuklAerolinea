@@ -27,5 +27,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/GansoSonicoJPA"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jpa"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsf"/>
+	<classpathentry kind="lib" path="lib/jsf/el-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

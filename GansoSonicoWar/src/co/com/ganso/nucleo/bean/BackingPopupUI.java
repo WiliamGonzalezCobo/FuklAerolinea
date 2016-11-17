@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.CloseEvent;
 
-public abstract class BackingPopupUI extends BackingUI implements Serializable { 
+public abstract class BackingPopupUI extends BackingUI implements Serializable {
 
 	/**
 	 * 
@@ -23,25 +23,26 @@ public abstract class BackingPopupUI extends BackingUI implements Serializable {
 		}
 		FacesContext fc = FacesContext.getCurrentInstance();
 		ELContext elContext = fc.getELContext();
-		String expresion=null;
-		if(getDestino().contains("#{")){
-			expresion=getDestino();
-		}else{
+		String expresion = null;
+		if (getDestino().contains("#{")) {
+			expresion = getDestino();
+		} else {
 			expresion = "#{" + getDestino() + "}";
 		}
-		ValueExpression ve = fc.getApplication().getExpressionFactory().createValueExpression(elContext, expresion, Object.class);
+		ValueExpression ve = fc.getApplication().getExpressionFactory().createValueExpression(elContext, expresion,
+				Object.class);
 		ve.setValue(elContext, valor);
 	}
-	
-	public void ocultarAjax(CloseEvent ce){
+
+	public void ocultarAjax(CloseEvent ce) {
 		ocultarPopup();
 	}
-	
-	public void mostrarPopup(){
+
+	public void mostrarPopup() {
 		visiblePopup = true;
 	}
-	
-	public void ocultarPopup(){
+
+	public void ocultarPopup() {
 		visiblePopup = false;
 	}
 
@@ -59,5 +60,5 @@ public abstract class BackingPopupUI extends BackingUI implements Serializable {
 
 	public void setVisiblePopup(boolean visiblePopup) {
 		this.visiblePopup = visiblePopup;
-	}	
+	}
 }

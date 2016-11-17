@@ -9,6 +9,7 @@
 		<class>co.com.ganso.entities.Estado</class>
 		<class>co.com.ganso.entities.FactorPrecio</class>
 		<class>co.com.ganso.entities.Operacion</class>
+		<class>co.com.ganso.entities.Pago</class>
 		<class>co.com.ganso.entities.Pais</class>
 		<class>co.com.ganso.entities.Persona</class>
 		<class>co.com.ganso.entities.PersonaPremio</class>
