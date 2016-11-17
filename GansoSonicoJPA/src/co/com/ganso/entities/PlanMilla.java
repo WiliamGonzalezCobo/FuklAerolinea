@@ -1,8 +1,16 @@
 package co.com.ganso.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import co.com.ganso.services.bussinesslogic.AnotacionParametro;
 
 
 /**
@@ -11,45 +19,61 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="TB_PLANMILLAS")
-@NamedQuery(name="PlanMilla.findAll", query="SELECT p FROM PlanMilla p")
-public class PlanMilla implements Serializable {
+@NamedQueries({
+@NamedQuery(name="PlanMilla.findIdPersona", query=PlanMilla.FIND_MILLAS_PERSONA),
+@NamedQuery(name="PlanMilla.findAll", query="SELECT p FROM PlanMilla p")})
+public class PlanMilla extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="N_IDPLANMILLA")
-	private long nIdplanmilla;
+	private Integer nIdplanmilla;
 
 	@Column(name="N_MILLASACUMULADAS")
-	private BigDecimal nMillasacumuladas;
+	private Integer nMillasacumuladas;
 
 	@Column(name="N_MILLASREDIMIDAS")
-	private BigDecimal nMillasredimidas;
+	private Integer nMillasredimidas;
+	
+	@Column(name="N_IDPERSONA")
+	private Integer nIdPersona;
 
 	public PlanMilla() {
 	}
 
-	public long getNIdplanmilla() {
+	public Integer getNIdplanmilla() {
 		return this.nIdplanmilla;
 	}
 
-	public void setNIdplanmilla(long nIdplanmilla) {
+	public void setNIdplanmilla(Integer nIdplanmilla) {
 		this.nIdplanmilla = nIdplanmilla;
 	}
 
-	public BigDecimal getNMillasacumuladas() {
+	public Integer getNMillasacumuladas() {
 		return this.nMillasacumuladas;
 	}
 
-	public void setNMillasacumuladas(BigDecimal nMillasacumuladas) {
+	public void setNMillasacumuladas(Integer nMillasacumuladas) {
 		this.nMillasacumuladas = nMillasacumuladas;
 	}
 
-	public BigDecimal getNMillasredimidas() {
+	public Integer getNMillasredimidas() {
 		return this.nMillasredimidas;
 	}
 
-	public void setNMillasredimidas(BigDecimal nMillasredimidas) {
+	public void setNMillasredimidas(Integer nMillasredimidas) {
 		this.nMillasredimidas = nMillasredimidas;
 	}
+	
+	@AnotacionParametro
+	public Integer getnIdPersona() {
+		return nIdPersona;
+	}
 
+	public void setnIdPersona(Integer nIdPersona) {
+		this.nIdPersona = nIdPersona;
+	}
+	protected static final String FIND_MILLAS_PERSONA = "SELECT p "
+		    + "FROM PlanMilla p "
+		    + "WHERE p.nIdPersona = :nIdPersona";
 }

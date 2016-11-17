@@ -1,0 +1,91 @@
+<ui:composition template="/template/template.xhtml" 
+				xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="content">
+
+	<div class="container container-table">
+		<div class="col-lg-6">
+			<div class="container">
+				<h:form class="form-horizontal" id="registrationForm">
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Identificacion" />
+							<h:inputText value="#{clienteBean.persona.NIdpersona}" class="form-control" id="Identificacion" pt:placeholder="Identificacion"></h:inputText>
+						</div>
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Pasaporte" />
+							<h:inputText value="#{clienteBean.persona.TPasaporte}" class="form-control" id="inputPasaporte" pt:placeholder="Pasaporte"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Nombres" />
+							<h:inputText value="#{clienteBean.persona.TNombres}" class="form-control" id="nombre" pt:placeholder="Nombres"></h:inputText>
+						</div>
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Apellidos" />
+							<h:inputText value="#{clienteBean.persona.TApellidos}" class="form-control" id="apellido" pt:placeholder="Apellidos"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Fecha de Nacimiento" />
+							<br />
+							<p:calendar value="#{clienteBean.persona.DFechanacimiento}" id="fecha" navigator="true" pattern="dd/MM/yyyy HH:mm" locale="co" />
+						</div>
+
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Direccion" />
+							<h:inputText value="#{clienteBean.persona.TDireccion}" class="form-control" id="inputDireccion" pt:placeholder="Direccion"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Telefono" />
+							<h:inputText value="#{clienteBean.persona.TTelefono}" class="form-control" id="telefono" pt:placeholder="Telefono"></h:inputText>
+						</div>
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Login" />
+							<h:inputText value="#{clienteBean.usuario.TLogin}" class="form-control" id="inputUsername" pt:placeholder="Usuario"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Contraseña" />
+							<h:inputSecret value="#{clienteBean.usuario.TPass}" class="form-control" id="inputPassword" pt:placeholder="Contraseña"></h:inputSecret>
+						</div>
+
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Confirmar Contraseña" />
+							<h:inputSecret value="#{clienteBean.confPass}" class="form-control" id="inputConfPassword" pt:placeholder="Confirmar Contraseña"></h:inputSecret>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-3">
+							<h:outputText class="control-label" value="Correo Electronico" />
+							<h:inputText value="#{clienteBean.usuario.TCorreo}" class="form-control" id="correo" pt:placeholder="Correo"></h:inputText>
+							
+						</div>
+						<div class="col-lg-6">
+									<h:outputText class="checkbox-inline"/>
+										<input type="checkbox" value="agree"></input> Acepto <a href="#">Políticas de uso y servicios</a>
+								</div>
+					</div>
+					
+						<div class="form-group">
+							<div class="col-lg-3">
+								<p:commandButton action="#{clienteBean.crearPersona}" value="Registrar" id="btnRegistrar" class="btn btn-primary" />
+							</div>
+						</div>
+					
+				</h:form>
+			</div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

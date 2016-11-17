@@ -1,7 +1,11 @@
 package co.com.ganso.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import co.com.ganso.services.bussinesslogic.AnotacionParametro;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,7 +16,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name="TB_VUELO")
-@NamedQuery(name="Vuelo.findAll", query="SELECT v FROM Vuelo v")
+@NamedQueries({
+	@NamedQuery(name="Vuelo.findAll", query="SELECT v FROM Vuelo v"),
+	@NamedQuery(name="Vuelo.findEscalas", query="SELECT v FROM Vuelo v WHERE v.tOrigen = :tOrigen")})
 public class Vuelo extends EntityCore implements Serializable {
 
 	/**
@@ -91,6 +97,7 @@ public class Vuelo extends EntityCore implements Serializable {
 		this.tDestino = tDestino;
 	}
 
+	@AnotacionParametro
 	public String getTOrigen() {
 		return this.tOrigen;
 	}

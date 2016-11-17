@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta charset="utf-8" />
@@ -20,70 +22,72 @@
 
 </h:head>
 <h:body>
-	<div class="container-fluid ">
+	<header>
 		<nav class="navbar navbar-default">
-		<div class="container-fluid" >
-			<div class="navbar-header">
-				<a class="navbar-brand" href="http://localhost:8180/gansosonico/index.xhtml"> <h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" />
-				</a>
+			<div class="container-fluid" >
+				<div class="navbar-header">
+					<a class="navbar-brand" href="http://localhost:8180/gansosonico/index.xhtml"> <h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" />
+					</a>
+				</div>
+				<h2 class="navbar-text">Aerolinea el ganso sónico</h2>
+				
+				<h:panelGroup id="panelLogin">
+					<h:form class="navbar-form navbar-right" rendered="#{!loginBean.tieneCredencial}">
+						<div class="form-group">
+							<div class="col-xs-9">
+								<h:outputText value="" />
+								<h:inputText value="#{loginBean.username}" class="form-control"
+									id="inputEmail" pt:placeholder="Usuario"></h:inputText>
+							</div>
+						</div>
+						<div class="form-group">
+		
+							<div class="col-xs-9">
+								<h:outputText value="" />
+								<h:inputSecret value="#{loginBean.password}" class="form-control"
+									id="inputPassword" pt:placeholder="Password"></h:inputSecret>
+							</div>
+		
+						</div>
+						<div class="form-group">
+							<div class="col-xs-offset-3 col-xs-9">
+								<p:commandButton action="#{loginBean.accede()}" value="Login" class="btn btn-primary" update="panelLogin panelCredencial"/>
+								<a href="http://localhost:8180/gansosonico/Cliente/registrar.xhtml">Registro</a>
+							</div>
+						</div>
+					</h:form>
+				</h:panelGroup>
+				
+				<h:panelGroup id="panelCredencial">
+					<h:form class="navbar-form navbar-right" rendered="#{loginBean.tieneCredencial}">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido #{loginBean.credencial.nombre} <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<ui:repeat var="url" value="#{loginBean.urls}">
+										<li><h:outputLink value="#{url.url}" >#{url.label}</h:outputLink></li>
+									</ui:repeat>
+									<li><h:commandLink action="#{loginBean.salir}" value="Salir" /> </li>
+								</ul>
+							</li>
+						</ul>
+					</h:form>
+				</h:panelGroup>
 			</div>
-			<h2 class="navbar-text">Aerolinea el ganso sónico (Administrador)</h2>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido Administrador <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-					
-						<li><a href="http://localhost:8180/gansosonico/admin/carga/cargarArchivo.jsf">Cargar Json</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="http://localhost:8180/gansosonico/admin/vuelos/vuelos.jsf">Vuelos</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="http://localhost:8180/gansosonico/admin/premios/premios.jsf">Premios</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="http://localhost:8180/gansosonico/index.xhtml">Salir</a></li>
-						
-					</ul>
-				</li>
-			</ul>
-		</div>
 		</nav>
-	</div>
-	<div class="container">
-		<ui:insert name="content">
+	</header>
+	<div class="container work-area">
+		<h:panelGroup style="width: 100%" layout="block" id="form_workarea">
+			<ui:insert name="content">
 
-		</ui:insert>
+			</ui:insert>
+		</h:panelGroup>
 	</div>
 
-	<div class="container-fluid">
-		<footer class="footer-distributed">
-			<div class="footer-left">
-				<h3>Ganso Sonico<span><h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" /></span></h3>
-				<p class="footer-company-name">Aerolinea &copy; 2016</p>
-			</div>
-			<div class="footer-center">
-				<div>
-					<i class="fa fa-map-marker"></i>
-					<p><span>Calle Falsa 123</span> Bogotá, Colombia</p>
-				</div>
-				<div>
-					<i class="fa fa-phone"></i>
-					<p>+1 555 123456</p>
-				</div>
-	
-				<div>
-					<i class="fa fa-envelope"></i>
-					<p><a href="mailto:support@gansosonico.com">support@gansosonico.com</a></p>
-				</div>
-			</div>
-	
-			<div class="footer-right">
-				<p class="footer-company-about">
-					<span>About the company</span> Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-				</p>
-				<div class="footer-icons">
-					<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-github"></i></a>
-				</div>
-			</div>
-		</footer>
-	</div>
+	<footer class="info-footer">
+		<h3><h:graphicImage library="default" name="img/logo.jpg" style="width: 35px; height: 35px; border-radius: 30px;" /></h3>
+		<h3>Ganso Sonico</h3>
+		<p class="footer-company-name">Aerolinea &copy; 2016</p>
+	</footer>
 
 	<ui:insert name="popups">
 

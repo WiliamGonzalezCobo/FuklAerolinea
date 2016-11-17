@@ -1,7 +1,13 @@
 package co.com.ganso.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -11,12 +17,12 @@ import javax.persistence.*;
 @Entity
 @Table(name="TB_ESTADO")
 @NamedQuery(name="Estado.findAll", query="SELECT e FROM Estado e")
-public class Estado implements Serializable {
+public class Estado extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="N_IDESTADO")
-	private long nIdestado;
+	private BigDecimal nIdestado;
 
 	@Column(name="T_ACTIVO")
 	private String tActivo;
@@ -30,11 +36,11 @@ public class Estado implements Serializable {
 	public Estado() {
 	}
 
-	public long getNIdestado() {
+	public BigDecimal getNIdestado() {
 		return this.nIdestado;
 	}
 
-	public void setNIdestado(long nIdestado) {
+	public void setNIdestado(BigDecimal nIdestado) {
 		this.nIdestado = nIdestado;
 	}
 

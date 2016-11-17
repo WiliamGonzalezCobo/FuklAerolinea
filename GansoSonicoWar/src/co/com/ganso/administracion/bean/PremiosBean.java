@@ -41,7 +41,7 @@ public class PremiosBean extends BackingUI {
 	}
 
 	private void cargarPremios() throws Exception {
-		listadoPremios = managerSvc.findAll(Premio.class);
+		listadoPremios = managerSvc.findList(new Premio(), "Premio.findAll");
 	}
 	
 	public void nuevoPremio(){

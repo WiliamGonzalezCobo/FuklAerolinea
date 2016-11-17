@@ -1,0 +1,84 @@
+<ui:composition template="/template/template.xhtml" 
+				xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<div class="row">
+			<h:panelGrid columns="1" style="margin-bottom:10px;">
+				<h:commandButton action="#{resultadoVuelosBean.regresar}" value="Regresar" />
+			</h:panelGrid>
+
+			<h1>Itinerario</h1>
+			
+			<h:panelGrid columns="3" width="100%">
+				<h:panelGrid columns="1">
+					<h:outputText value="(#{resultadoVuelosBean.itinerario.origen.TCodigo}) #{resultadoVuelosBean.itinerario.origen.TNombre} - #{resultadoVuelosBean.itinerario.origen.TCiudad}" style="font-weight: bold"/>
+					<h:outputText value=" a " />
+					<h:outputText value="(#{resultadoVuelosBean.itinerario.destino.TCodigo}) #{resultadoVuelosBean.itinerario.destino.TNombre} - #{resultadoVuelosBean.itinerario.destino.TCiudad}" style="font-weight: bold"/>					
+				</h:panelGrid>
+				<h:panelGrid columns="1">
+					<h:outputText value="Adultos (#{resultadoVuelosBean.itinerario.cantidadAdultos})" style="font-weight: bold"/>
+					<h:outputText value="Niños (#{resultadoVuelosBean.itinerario.cantidadNinos})" style="font-weight: bold"/>
+					<h:outputText value="Bebes (#{resultadoVuelosBean.itinerario.cantidadBebes})" style="font-weight: bold"/>
+				</h:panelGrid>
+				<h:panelGrid columns="1">
+					<h:outputText value="Clase" style="font-weight: bold"/>
+					<h:outputText value="#{resultadoVuelosBean.itinerario.claseDesc}"/>
+				</h:panelGrid>
+			</h:panelGrid>
+			<h:panelGroup layout="block" style="width: 100%">
+			</h:panelGroup>
+			<br /> <br />
+			<div class="row">
+				<h:form id="form_resultadoVuelos">
+					<p:dataTable rowIndexVar="count" id="tabla_escala" var="itinerario" value="#{resultadoVuelosBean.itinerarios}" emptyMessage="No se encontraron registros." rows="15" paginator="true" paginatorPosition="bottom">
+
+						<p:column headerText="Origen:">
+							<h:outputText value="#{itinerario.origen.TNombre} (#{itinerario.origen.TCiudad})" />
+						</p:column>
+
+						<p:column headerText="Destino:">
+							<h:outputText value="#{itinerario.destino.TNombre} (#{itinerario.destino.TCiudad})" />
+						</p:column>
+
+						<p:column headerText="Salida:">
+							<h:outputText value="#{itinerario.DFecha}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="co" type="both" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="itinerario">
+							<p:dataTable id="escalas" var="escala" value="#{resultadoVuelosBean.itinerarios.get(count).vuelos}" emptyMessage="No se encontraron registros.">
+
+								<p:column headerText="Origen:">
+									<h:outputText value="#{escala.vuelo.origen.TNombre} (#{escala.vuelo.origen.TCiudad})" />
+								</p:column>
+
+								<p:column headerText="Destino:">
+									<h:outputText value="#{escala.vuelo.destino.TNombre} (#{escala.vuelo.destino.TCiudad})" />
+								</p:column>
+
+								<p:column headerText="Salida:">
+									<h:outputText value="#{escala.vuelo.DFechahorasalida}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="co" type="both" />
+									</h:outputText>
+								</p:column>
+							</p:dataTable>
+						</p:column>
+
+						<p:column>
+							<p:commandButton value="Comprar" action="#{resultadoVuelosBean.comprar}" update=":form_workarea" styleClass="btn btn-primary" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</div>
+		</div>
+		
+		<h:panelGroup id="popups">
+		</h:panelGroup>
+		
+	</ui:define>
+</ui:composition>

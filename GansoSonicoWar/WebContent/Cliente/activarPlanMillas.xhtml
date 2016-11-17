@@ -1,0 +1,26 @@
+<ui:composition template="/template/template.xhtml" 
+				xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="content">
+
+	<div class="container container-table">
+		<div class="col-lg-6">
+			<div class="container">
+				<p>El plan de millas permite a nuestros clientes, redimir sus millas de viaje en diferentes premios, según el acumulado y el numero de millas por premio.</p>
+				<h:form class="form-horizontal" id="registrationForm">
+				<div class="form-group">
+							<div class="col-lg-3">
+								<p:commandButton action="#{activarPlanMillas.activarPlanMillas()}" value="Activar Plan" id="btnRegistrar" class="btn btn-primary" />
+							</div>
+						</div>			
+				</h:form>
+			</div>
+		</div>
+	</div>
+</ui:define>
+</ui:composition>

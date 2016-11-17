@@ -1,126 +1,102 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/template.xhtml" 
+				xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-<h:head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<h:outputStylesheet library="default" name="css/bootstrap.css" />
-	<h:outputStylesheet library="default" name="css/bootstrap-theme.css" />
-	<h:outputStylesheet library="default" name="css/main.css" />
-	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
-	<h:outputScript library="default" name="js/bootstrap.js" />
-	<h:outputScript library="default" name="js/bootstrap.min.js" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-
-</h:head>
-<h:body>
-
-	<div class="container-fluid ">
-		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="../index.html"> <h:graphicImage
-						library="default" name="img/logo.jpg"
-						style="width: 35px; height: 35px; border-radius: 30px;" />
-				</a>
-			</div>
-			<h2 class="navbar-text">Aerolinea el ganso sónico</h2>
-
-			<h:form class="navbar-form navbar-right">
-				<div class="form-group">
-					<div class="col-xs-9">
-						<h:outputText value="" />
-						<h:inputText value="#{login.username}" class="form-control"
-							id="inputEmail" pt:placeholder="Usuario"></h:inputText>
+	<ui:define name="content">
+		<div class="row">
+			<div class="container" style="border-radius: 10px; width: 100%;">
+				<br />
+				<h:form id="form_booking">
+					<div class="col-xs-12">
+						<div class="form-group col-xs-12">
+							<p:selectOneRadio id="trayecto"  value="#{bookingBean.trayecto}" style="display: inline-block">
+								 <f:selectItems value="#{bookingBean.tiposTrayectos}"/>
+							</p:selectOneRadio>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-
-					<div class="col-xs-9">
-						<h:outputText value="" />
-						<h:inputSecret value="#{login.password}" class="form-control"
-							id="inputPassword" pt:placeholder="Password"></h:inputSecret>
+					<div class="col-xs-12">
+						<div class="form-group col-xs-6">
+							<p:outputLabel value="Origen: " for="origen" styleClass="control-label"></p:outputLabel>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span> 
+								<h:inputText id="origen" value="(#{bookingBean.itinerario.origen.TCodigo}) #{bookingBean.itinerario.origen.TNombre} - #{bookingBean.itinerario.origen.TCiudad}"  styleClass="form-control" pt:placeholder="Aeropuerto Origen" disabled="true"/>
+								<span class="input-group-addon"><h:commandLink value="ver" action="#{bookingBean.verOrigen}" id="aeropuertoOrigen" title="Ver Aeropuertos" /></span>
+							</div>
+							
+						</div>
+						<div class="form-group col-xs-6">
+							<p:outputLabel value="Destino: " for="destino" styleClass="control-label"></p:outputLabel>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-plane"></span></span>
+								<h:inputText id="destino" value="(#{bookingBean.itinerario.destino.TCodigo}) #{bookingBean.itinerario.destino.TNombre} - #{bookingBean.itinerario.destino.TCiudad}"  styleClass="form-control" pt:placeholder="Aeropuerto Destino" disabled="true"/>
+								<span class="input-group-addon"><h:commandLink value="ver" action="#{bookingBean.verDestino}" id="aeropuertoDestino" title="Ver Aeropuertos" /></span>
+							</div>
+						</div>
 					</div>
-
-				</div>
-				<div class="form-group">
-					<div class="col-xs-offset-3 col-xs-9">
-
-						<p:commandButton action="#{login.accede()}" value="Login"
-							class="btn btn-primary" />
+					<div class="col-xs-12">
+						<div class="form-group col-xs-6">
+							<p:outputLabel value="Fecha Ida: " for="fechaIda" styleClass="control-label"></p:outputLabel>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								<p:calendar id="fechaIda" value="#{bookingBean.itinerario.DFecha}" navigator="true" pattern="dd/MM/yyyy" locale="co" />
+							</div>
+						</div>
+						<div class="form-group col-xs-6">
+							<p:outputLabel value="Fecha Regreso: " for="fechaRegreso" styleClass="control-label"></p:outputLabel>
+							<div class="input-group">
+								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+								<p:calendar id="fechaRegreso" value="#{bookingBean.itinerario.dFechaRegreso}" navigator="true" pattern="dd/MM/yyyy" locale="co" />
+							</div>
+						</div>
 					</div>
-				</div>
-			</h:form>
-		</div>
-		</nav>
-	</div>
-	<div class="container container-table">
-		<div class="row vertical-center-row">
-			<div class="text-center col-md-4 col-md-offset-4"></div>
-		</div>
-	</div>
-
-	<div class="container">
-		<ui:insert name="content">
-
-		</ui:insert>
-	</div>
-
-	<div class="container-fluid">
-		<footer class="footer-distributed">
-		<div class="footer-left">
-			<h3>
-				Ganso Sonico<span><h:graphicImage library="default"
-						name="img/logo.jpg"
-						style="width: 35px; height: 35px; border-radius: 30px;" /></span>
-			</h3>
-			<p class="footer-company-name">Aerolinea © 2016</p>
-		</div>
-		<div class="footer-center">
-			<div>
-				<i class="fa fa-map-marker"></i>
-				<p>
-					<span>Calle Falsa 123</span> Bogotá, Colombia
-				</p>
-			</div>
-			<div>
-				<i class="fa fa-phone"></i>
-				<p>+1 555 123456</p>
-			</div>
-
-			<div>
-				<i class="fa fa-envelope"></i>
-				<p>
-					<a href="mailto:support@gansosonico.com">support@gansosonico.com</a>
-				</p>
+					<div class="col-xs-12">
+						<div class="form-group col-xs-4">
+							<p:outputLabel value="Adultos: " for="adultos" styleClass="control-label"></p:outputLabel>
+							<h:selectOneMenu value="#{bookingBean.itinerario.cantidadAdultos}" id="adultos" styleClass="form-control">
+								<f:selectItems value="#{bookingBean.listaCantidades}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group col-xs-4">
+							<p:outputLabel value="Niños: " for="ninos" styleClass="control-label"></p:outputLabel>
+							<h:selectOneMenu value="#{bookingBean.itinerario.cantidadNinos}" id="ninos" styleClass="form-control">
+								<f:selectItems value="#{bookingBean.listaCantidades}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group col-xs-4">
+							<p:outputLabel value="Bebes: " for="bebes" styleClass="control-label"></p:outputLabel>
+							<h:selectOneMenu value="#{bookingBean.itinerario.cantidadBebes}" id="bebes" styleClass="form-control">
+								<f:selectItems value="#{bookingBean.listaCantidades}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group col-xs-12">
+							<p:outputLabel value="Clase: " for="clase" styleClass="control-label"></p:outputLabel>
+							<h:selectOneMenu value="#{bookingBean.itinerario.clase}" id="clase" styleClass="form-control">
+								<f:selectItems value="#{bookingBean.listaClase}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<br />
+					<div class="col-xs-12">
+						<br />
+						<div class="form-group col-xs-6">
+							<p:commandButton value="Buscar Vuelos" action="#{bookingBean.buscar}"  update=":form_workarea" styleClass="btn btn-primary"/>
+						</div>
+						<div class="form-group col-xs-6" style="text-align: right;">
+							<p:commandButton value="Limpiar Campos" action="#{bookingBean.limpiar}"  update=":form_workarea" styleClass="btn btn-default"/>
+						</div>
+					</div>
+				</h:form>
 			</div>
 		</div>
-
-		<div class="footer-right">
-			<p class="footer-company-about">
-				<span>About the company</span> Lorem ipsum dolor sit amet,
-				consectateur adispicing elit. Fusce euismod convallis velit, eu
-				auctor lacus vehicula sit amet.
-			</p>
-			<div class="footer-icons">
-				<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-					class="fa fa-twitter"></i></a> <a href="#"><i
-					class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-github"></i></a>
-			</div>
-		</div>
-		</footer>
-	</div>
-
-	<ui:insert name="popups">
-
-	</ui:insert>
-</h:body>
-</html>
+		
+		<h:panelGroup id="popups">
+			<ui:include src="/admin/popups/popupAeropuertos.xhtml" />
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

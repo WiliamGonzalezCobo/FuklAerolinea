@@ -37,7 +37,7 @@ public class VuelosBean extends BackingUI {
 	}
 
 	private void cargarVuelos() throws Exception {
-		listadoVuelos = managerSvc.findAll(Vuelo.class);
+		listadoVuelos = managerSvc.findList(new Vuelo(), "Vuelo.findAll");
 	}
 	
 	public void nuevoVuelo(){

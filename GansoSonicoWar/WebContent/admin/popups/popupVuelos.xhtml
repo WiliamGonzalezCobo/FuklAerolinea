@@ -4,7 +4,7 @@
 				xmlns:h="http://java.sun.com/jsf/html"
 				xmlns:p="http://primefaces.org/ui">
 
-	<p:dialog header="Vuelo" visible="#{popupVuelosBean.visiblePopup}" rendered="#{popupVuelosBean.visiblePopup}" modal="true" resizable="false" position="center" draggable="false"
+	<p:dialog header="Vuelo" visible="#{popupVuelosBean.visiblePopup}" rendered="#{popupVuelosBean.visiblePopup}" resizable="false" position="center" draggable="false"
 		closable="true" closeOnEscape="false" width="380px">
 		<p:ajax event="close" update=":popups" listener="#{popupVuelosBean.ocultarAjax}" />
 		<h:form id="form_popupvuelo">

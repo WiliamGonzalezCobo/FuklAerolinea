@@ -96,7 +96,7 @@ public class PopupVuelosBean extends BackingPopupUI {
 
 	public void eliminar() {
 		try {
-			managerSvc.delete(vuelo.getNIdvuelo());
+			managerSvc.delete(vuelo);
 			dialogInfo("Se ha eliminado el registro.");
 		} catch (Exception e) {
 			dialogError(e);

@@ -1,7 +1,19 @@
 package co.com.ganso.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+import co.com.ganso.services.bussinesslogic.AnotacionParametro;
 
 
 /**
@@ -11,17 +23,17 @@ import javax.persistence.*;
 @Entity
 @Table(name="TB_USUARIO")
 @NamedQueries({
-@NamedQuery(name="Usuario.findCredenciales", query="SELECT u FROM Usuario u WHERE u.tLogin = :username and u.tPass = :password and u.tAdministrador = :type"),
-@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")})
-public class Usuario implements Serializable {
+@NamedQuery(name="Usuario.findCredenciales", query=Usuario.FIND_CREDENCIALES),
+@NamedQuery(name="Usuario.findAll", query=Usuario.FIND_ALL)})
+public class Usuario extends EntityCore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="N_IDUSUARIO")
-	private long nIdusuario;
+	private BigDecimal nIdusuario;
 
 	@Column(name="N_PERSONA")
-	private java.math.BigDecimal nPersona;
+	private Integer nPersona;
 
 	@Column(name="T_ACTIVO")
 	private String tActivo;
@@ -40,26 +52,33 @@ public class Usuario implements Serializable {
 	
 	@Column(name="T_CLIENTE")
 	private String tCliente;
+	
+	@PrimaryKeyJoinColumn(name = "N_PERSONA", referencedColumnName = "N_IDPERSONA")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Persona persona;
 
 	public Usuario() {
 	}
-
-	public long getNIdusuario() {
+	
+	@AnotacionParametro
+	public BigDecimal getNIdusuario() {
 		return this.nIdusuario;
 	}
 
-	public void setNIdusuario(long nIdusuario) {
+	public void setNIdusuario(BigDecimal nIdusuario) {
 		this.nIdusuario = nIdusuario;
 	}
-
-	public java.math.BigDecimal getNPersona() {
+	
+	@AnotacionParametro
+	public Integer getNPersona() {
 		return this.nPersona;
 	}
 
-	public void setNPersona(java.math.BigDecimal nPersona) {
+	public void setNPersona(Integer nPersona) {
 		this.nPersona = nPersona;
 	}
 
+	@AnotacionParametro
 	public String getTActivo() {
 		return this.tActivo;
 	}
@@ -68,6 +87,7 @@ public class Usuario implements Serializable {
 		this.tActivo = tActivo;
 	}
 
+	@AnotacionParametro
 	public String getTCorreo() {
 		return this.tCorreo;
 	}
@@ -76,6 +96,7 @@ public class Usuario implements Serializable {
 		this.tCorreo = tCorreo;
 	}
 
+	@AnotacionParametro
 	public String getTLogin() {
 		return this.tLogin;
 	}
@@ -84,6 +105,7 @@ public class Usuario implements Serializable {
 		this.tLogin = tLogin;
 	}
 
+	@AnotacionParametro
 	public String getTPass() {
 		return this.tPass;
 	}
@@ -100,6 +122,7 @@ public class Usuario implements Serializable {
 		this.tAdministrador = tAdministrador;
 	}
 
+	@AnotacionParametro
 	public String getTCliente() {
 		return tCliente;
 	}
@@ -107,5 +130,21 @@ public class Usuario implements Serializable {
 	public void setTCliente(String tCliente) {
 		this.tCliente = tCliente;
 	}
+	
+	protected static final String FIND_ALL = "SELECT u FROM Usuario u";
+	
+	protected static final String FIND_CREDENCIALES = "SELECT u "
+												    + "FROM Usuario u "
+												    + "WHERE u.tLogin = :tLogin "
+												  		   + "and u.tPass = :tPass "
+												  		   + "and u.tActivo = :tActivo";
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	} 
 
 }

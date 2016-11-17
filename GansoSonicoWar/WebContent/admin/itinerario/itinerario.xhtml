@@ -1,0 +1,48 @@
+<ui:composition template="/template/template.xhtml" 
+				xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<div class="row">
+			<h1>Itinerarios</h1>
+			<h3>Nuestros itinerarios</h3>
+			<br /> <br />
+			<div class="row">
+				<h:form id="form_itinerarios">
+					<h:panelGrid columns="1" style="margin-bottom:10px;">
+						<h:commandButton action="#{itinerarioBean.nuevoItinerario}" value="Nuevo" />
+					</h:panelGrid>
+
+					<p:dataTable var="itinerario" value="#{itinerarioBean.itinerarios}" emptyMessage="No se encontraron registros." rows="10" paginator="true" paginatorPosition="bottom" selectionMode="single"
+						selection="#{itinerarioBean.itinerarioSeleccionado}" rowKey="#{itinerario.NIditinerario}">
+						<p:ajax event="rowSelect" listener="#{itinerarioBean.verItinerario}" update=":popups"/>
+
+						<p:column headerText="Origen:" filterBy="#{itinerario.origen.TNombre} #{itinerario.origen.TCiudad}" filterMatchMode="contains">
+							<h:panelGrid columns="1" styleClass="tabla-no-borde">
+								<h:outputText value="#{itinerario.origen.TNombre}" />
+								<h:outputText value="(#{itinerario.origen.TCiudad})" styleClass="negrilla" />
+							</h:panelGrid>
+						</p:column>
+
+						<p:column headerText="Destino:" filterBy="#{itinerario.destino.TNombre} #{itinerario.destino.TCiudad}" filterMatchMode="contains">
+							<h:panelGrid columns="1" styleClass="tabla-no-borde">
+								<h:outputText value="#{itinerario.destino.TNombre}" />
+								<h:outputText value="(#{itinerario.destino.TCiudad})" styleClass="negrilla" />
+							</h:panelGrid>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</div>
+		</div>
+		
+		<h:panelGroup id="popups">
+			<ui:include src="/admin/popups/popupItinerarios.xhtml" />
+			<ui:include src="/admin/popups/popupAeropuertos.xhtml" />
+			<ui:include src="/admin/popups/popupListaVuelo.xhtml" />
+		</h:panelGroup>
+		
+	</ui:define>
+</ui:composition>
